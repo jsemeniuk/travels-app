@@ -4,11 +4,7 @@ from my_travels.models import PlacesVisited
 
 
 class PlacesSerializer(serializers.GeoFeatureModelSerializer):
-    """Marker GeoJSON serializer."""
-
     class Meta:
-        """Marker serializer meta class."""
-
-        fields = ("id", "name", "visit_date", "description")
+        fields = ("id", "name", "visit_date", "description", "photo")
         geo_field = "location"
         model = PlacesVisited
