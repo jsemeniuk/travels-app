@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from my_travels.views import TravelsMapView
+from django.contrib.auth import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/", include("my_travels.api")),
-    path("my_travels/", include("my_travels.urls")),
+    path("my_travels/", include("my_travels.urls")), 
+    path('accounts/login/', views.LoginView.as_view(), name='login'),
 ]
