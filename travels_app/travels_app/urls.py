@@ -17,6 +17,12 @@ from django.contrib import admin
 from django.urls import include, path
 from my_travels.views import TravelsMapView
 from django.contrib.auth import views
+from django.conf.urls import handler404
+
+handler404 = 'my_travels.views.handler404'
+handler400 = 'my_travels.views.handler400'
+handler500 = 'my_travels.views.handler500'
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
