@@ -7,7 +7,6 @@ map.locate()
     .on("locationfound", (e) => map.setView(e.latlng, 8))
     .on("locationerror", () => map.setView([0, 0], 5));
 
-    
 async function load_places() {
     const places_url = `/api/my_travels/?in_bbox=${map
         .getBounds()
