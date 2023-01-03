@@ -5,6 +5,7 @@
 {% block content %}
     <div class="place">
         <h2>{{ place.name }}</h2>
+        <a class="btn btn-default" href="{% url 'place_edit' pk=place.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         <p>{{ place.description|linebreaksbr }}</p>
     </div>
 {% endblock %}

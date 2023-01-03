@@ -50,3 +50,7 @@ form {
 p {
     padding-left: 20px;
 }
+
+.post-form textarea, .post-form input {
+    width: 100%;
+}
