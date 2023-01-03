@@ -19,9 +19,8 @@ async function load_places() {
 async function render_places() {
     const markers = await load_places();
     L.geoJSON(markers)
-        .bindPopup((layer) => layer.feature.properties.name)
+        .bindPopup((layer) => "<h3>" + layer.feature.properties.name + "</h3>" + "<br><p><a href='" + layer.feature.id + "'>View more</a></p>")
         .addTo(map);
 }
 
 map.on("moveend", render_places);
-

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="place">
+        <h2>{{ place.name }}</h2>
+        <p>{{ place.description|linebreaksbr }}</p>
+    </div>
+{% endblock %}

@@ -1,7 +1,8 @@
 from django.urls import path
 
-from .views import TravelsMapView
+from . import views
 
 urlpatterns = [
-    path("map/", TravelsMapView.as_view()),
+    path("map/", views.TravelsMapView.as_view()),
+    path('map/<int:pk>/', views.place_detail, name='place_detail'),
 ]
