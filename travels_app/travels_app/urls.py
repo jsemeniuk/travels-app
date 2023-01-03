@@ -27,6 +27,7 @@ handler500 = 'my_travels.views.handler500'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/", include("my_travels.api")),
-    path("my_travels/", include("my_travels.urls")), 
+    path("", include("my_travels.urls")), 
     path('accounts/login/', views.LoginView.as_view(), name='login'),
+    path('accounts/logout/', views.LogoutView.as_view(next_page='/map'), name='logout'),
 ]

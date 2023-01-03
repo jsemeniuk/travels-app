@@ -133,7 +133,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/my_travels/map'
+LOGIN_REDIRECT_URL = '/map'
 
 GEOS_LIBRARY_PATH = r'C:/Program Files/PostgreSQL/12/bin/libgeos_c.dll'
 
