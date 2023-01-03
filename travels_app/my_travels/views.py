@@ -41,6 +41,19 @@ def place_edit(request, pk):
     else:
         form = PlaceForm(instance=place)
     return render(request, 'my_travels/place_edit.html', {'form': form})
+
+@login_required
+def place_new(request):
+    if request.method == "POST":
+        form = PlaceForm(request.POST)
+        if form.is_valid():
+            place = form.save(commit=False)
+            place.user = request.user
+            place.save()
+            return redirect("place_detail", pk=place.pk)
+    else:
+        form = PlaceForm()
+    return render(request, 'my_travels/place_edit.html', {'form': form})
 class TravelsMapView(TemplateView):
 
     template_name = "my_travels/map.html"

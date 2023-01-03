@@ -25,6 +25,14 @@ body {
     margin-top: -50px;
 }
 
+.top-menu-add {
+    color: #ff00d2;
+    float: right;
+    font-size: 15pt;
+    margin-right: 30px;
+    margin-top: -47px;
+}
+
 h1, h1 a {
     font-family: 'Lobster', cursive;
     color: #ffffff;
