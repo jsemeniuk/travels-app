@@ -6,9 +6,13 @@ from my_travels.serializers import PlacesSerializer
 
 
 class PlacesViewSet(viewsets.ReadOnlyModelViewSet):
-    """Marker view set."""
-
     bbox_filter_field = "location"
     filter_backends = (filters.InBBoxFilter,)
-    queryset = PlacesVisited.objects.all()
     serializer_class = PlacesSerializer
+
+    def get_queryset(self):
+        get_user = self.request.user
+        queryset = PlacesVisited.objects.filter(user=get_user)
+        return queryset
+    
+    
