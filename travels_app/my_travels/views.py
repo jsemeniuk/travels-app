@@ -3,7 +3,7 @@ import json
 from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
 
-from .models import PlacesVisited
+from .models import PlacesVisited, UserConfig
 from .forms import PlaceForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import RequestContext
@@ -57,8 +57,19 @@ def place_new(request):
 class TravelsMapView(TemplateView):
 
     template_name = "my_travels/map.html"
-    def get_context_data(self, **kwargs):
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(request, **kwargs)
+        return self.render_to_response(context)
+
+    def get_context_data(self, request, **kwargs):
         """Return the view context data."""
         context = super().get_context_data(**kwargs)
         context["my_travels"] = json.loads(serialize("geojson", PlacesVisited.objects.all()))
+        try:
+            user_config = UserConfig.objects.get(user = request.user)
+            context["map_page_title"] = user_config.map_page_title
+        except:
+            context["map_page_title"] = "Visited Places"
         return context 
+        
