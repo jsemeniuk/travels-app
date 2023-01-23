@@ -30,19 +30,13 @@ class AddEditPlaceTest(FunctionalTest):
         #TODO add better way to wait for map to load
         sleep(5)
  
-        add_icon = self.browser.find_element_by_css_selector('.top-menu-add')
-        add_icon.click()
+        self.browser.get('http://localhost:8000/new&location=51.00,17.00')
 
         name = self.browser.find_element_by_id('id_name')
         name.send_keys('Test Place')
 
         description = self.browser.find_element_by_id('id_description')
         description.send_keys('Test description')
-
-        #TODO find better way to click more specific place on map
-        location_map = self.browser.find_element_by_css_selector('#id_location_map canvas')
-        action = ActionChains(self.browser)
-        action.move_to_element(location_map).click().perform()
 
         save_button = self.browser.find_element_by_css_selector('.save')
         save_button.click()

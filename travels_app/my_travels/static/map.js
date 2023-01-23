@@ -23,4 +23,11 @@ async function render_places() {
         .addTo(map);
 }
 
+function click_on_map(point) {
+    var url= "/new&location=" + point.latlng.lat + "," + point.latlng.lng; 
+    window.location = url; 
+}
+
+
 map.on("moveend", render_places);
+map.on("click", click_on_map);

@@ -4,7 +4,6 @@
 {% block content %}
     {% if user.is_authenticated %}
     <h2>{{ map_page_title }}</h2>
-    <a href="{% url 'place_new' %}" class="top-menu-add"><span class="glyphicon glyphicon-plus"></span></a>
     {{ my_travels|json_script:"my-travels-data" }}
     <div id="map"></div>
     <script src="{% static 'map.js' %}"></script>
