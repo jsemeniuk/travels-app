@@ -3,10 +3,9 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-    <h2>{{ map_page_title }}</h2>
     {{ my_travels|json_script:"my-travels-data" }}
     <div id="map"></div>
-    <script src="{% static 'map.js' %}"></script>
+    <script src="{% static 'js/map.js' %}"></script>
     {% else %}
     <h2>You're not authorised to view this page. Click <a href="{% url 'login' %}">here</a> to log in</h2>
     {% endif %}           
