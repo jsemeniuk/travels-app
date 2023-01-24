@@ -12,8 +12,4 @@ class PlacesVisited(models.Model):
     photo = models.FileField(upload_to='travel_photos', blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-class UserConfig(dbmodels.Model):
-    site_title = dbmodels.CharField(max_length=100)
-    map_page_title = dbmodels.CharField(max_length=100)
-    user = dbmodels.ForeignKey(User, on_delete=dbmodels.CASCADE)
 
