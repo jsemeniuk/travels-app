@@ -11,5 +11,15 @@ class Places(models.Model):
     description = models.TextField(blank=True)
     photo = models.FileField(upload_to='travel_photos', blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    VISTITED = 'AV'
+    WISHLIST = 'WI'
+    GROUP_CHOICES = [
+        (VISTITED, 'Already Visited'),
+        (WISHLIST, 'Wishlist')]
+    group = models.CharField(
+        max_length=2,
+        choices=GROUP_CHOICES,
+        default=VISTITED,
+    )
 
 

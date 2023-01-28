@@ -3,7 +3,8 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-    {{ my_travels|json_script:"my-travels-data" }}
+    {{ visited_places|json_script:"visited-places-data" }}
+    {{ wishlist|json_script:"wishlist-data" }}
     <div id="map"></div>
     <script src="{% static 'js/map.js' %}"></script>
     {% else %}

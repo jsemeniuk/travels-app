@@ -11,8 +11,8 @@ class NewPlaceForm(forms.ModelForm):
             initial=datetime.today()
             )
     class Meta:
-        model = PlacesVisited
-        fields = ("name", "visit_date", "description")
+        model = Places
+        fields = ("name", "visit_date", "description", "group")
 
 class EditPlaceForm(forms.ModelForm):
     location = forms.PointField(widget=
@@ -24,5 +24,5 @@ class EditPlaceForm(forms.ModelForm):
             initial=datetime.today()
             )
     class Meta:
-        model = PlacesVisited
-        fields = ("name", "visit_date", "description", "location")
+        model = Places
+        fields = ("name", "visit_date", "description", "location", "group")
