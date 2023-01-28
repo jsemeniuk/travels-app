@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 import datetime
-from my_travels.models import PlacesVisited
+from my_travels.models import Places
 
 def add_new_user(login, password):
     user = User.objects.create_user(username=login,
@@ -8,7 +8,7 @@ def add_new_user(login, password):
     return user
 
 def add_new_place(user):
-    first_place = PlacesVisited()
+    first_place = Places()
     first_place.name = 'Trójkąt Bermudzki'
     first_place.location = 'POINT(-71.05 27.051)'
     first_place.visit_date = '1978-11-03'

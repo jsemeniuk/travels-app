@@ -3,7 +3,7 @@ import json
 from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
 
-from .models import PlacesVisited
+from .models import Places
 from .forms import EditPlaceForm, NewPlaceForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import RequestContext
@@ -25,12 +25,12 @@ def handler500(request, *args, **argv):
 
 @login_required
 def place_detail(request, pk):
-    place = get_object_or_404(PlacesVisited, pk=pk)
+    place = get_object_or_404(Places, pk=pk)
     return render(request, 'my_travels/place_details.html', {'place': place})
 
 @login_required
 def place_edit(request, pk):
-    place = get_object_or_404(PlacesVisited, pk=pk)
+    place = get_object_or_404(Places, pk=pk)
     if request.method == "POST":
         form = EditPlaceForm(request.POST, instance=place)
         if form.is_valid():
@@ -68,5 +68,6 @@ class TravelsMapView(TemplateView):
     def get_context_data(self, request, **kwargs):
         """Return the view context data."""
         context = super().get_context_data(**kwargs)
-        context["my_travels"] = json.loads(serialize("geojson", PlacesVisited.objects.all()))
+        context["visited_places"] = json.loads(serialize("geojson", Places.objects.all()))
+        context["wishlist"] = json.loads(serialize("geojson", Places.objects.all()))
         return context 

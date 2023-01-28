@@ -1,4 +1,4 @@
 from django.contrib.gis import admin
-from .models import PlacesVisited
+from .models import Places
 
-admin.site.register(PlacesVisited, admin.GISModelAdmin)
+admin.site.register(Places, admin.GISModelAdmin)

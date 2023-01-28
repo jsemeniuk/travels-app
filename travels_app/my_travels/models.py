@@ -4,7 +4,7 @@ from django.db import models as dbmodels
 
 User= settings.AUTH_USER_MODEL
 
-class PlacesVisited(models.Model):
+class Places(models.Model):
     name = models.CharField(max_length=100)
     location = models.PointField()
     visit_date = models.DateField(blank=True)

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.gis import forms
-from .models import PlacesVisited
+from .models import Places
 from datetime import datetime
 from django.contrib.admin import widgets 
 

@@ -3,14 +3,14 @@ from django.contrib.auth.models import User
 import datetime
 
 
-from my_travels.models import PlacesVisited
+from my_travels.models import Places
 
 class PlacesModelsTest(TestCase):
 
     def test_adding_places_for_one_user(self):
         user = User.objects.create_user(username='MysteryPlaces',
                                               password='MysteryPlaces123')
-        first_place = PlacesVisited()
+        first_place = Places()
         first_place.name = 'Trójkąt Bermudzki'
         first_place.location = 'POINT(-71.05 27.051)'
         first_place.visit_date = '1978-11-03'
@@ -24,7 +24,7 @@ class PlacesModelsTest(TestCase):
         first_place.user = user
         first_place.save()
 
-        second_place = PlacesVisited()
+        second_place = Places()
         second_place.name = 'Potwór z Loch Ness'
         second_place.location = 'POINT(-4.48 57.27)'
         second_place.visit_date = '1933-04-14'
@@ -36,7 +36,7 @@ class PlacesModelsTest(TestCase):
         second_place.user = user
         second_place.save()
 
-        saved_places = PlacesVisited.objects.all()
+        saved_places = Places.objects.all()
         self.assertEqual(len(saved_places), 2)
 
         first_saved_item = saved_places[0]
@@ -48,7 +48,7 @@ class PlacesModelsTest(TestCase):
     def test_adding_places_for_different_users(self):
         first_user = User.objects.create_user(username='Vincent Gaddis',
                                               password='InvisibleHorizons1965')
-        first_place = PlacesVisited()
+        first_place = Places()
         first_place.name = 'Trójkąt Bermudzki'
         first_place.location = 'POINT(-71.05 27.051)'
         first_place.visit_date = '1978-11-03'
@@ -64,7 +64,7 @@ class PlacesModelsTest(TestCase):
         
         second_user = User.objects.create_user(username='Robert Wilsona',
                                               password='ZdjęciaChirurga1934')
-        second_place = PlacesVisited()
+        second_place = Places()
         second_place.name = 'Potwór z Loch Ness'
         second_place.location = 'POINT(-4.48 57.27)'
         second_place.visit_date = '1934-04-01'
@@ -82,17 +82,17 @@ class PlacesModelsTest(TestCase):
         second_place.user = second_user
         second_place.save()
 
-        third_place = PlacesVisited()
+        third_place = Places()
         third_place.name = 'Tu też Trójkąt Bermudzki'
         third_place.location = 'POINT(-66.01 30.82)'
         third_place.visit_date = '1978-11-03'
         third_place.user = first_user
         third_place.save()
 
-        saved_places = PlacesVisited.objects.all()
+        saved_places = Places.objects.all()
         self.assertEqual(len(saved_places), 3)
 
-        first_users_places = PlacesVisited.objects.filter(user=first_user)
+        first_users_places = Places.objects.filter(user=first_user)
         self.assertEqual(len(first_users_places), 2)
 
         first_saved_item = saved_places[0]
