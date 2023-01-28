@@ -30,7 +30,7 @@ class AddEditPlaceTest(FunctionalTest):
         #TODO add better way to wait for map to load
         sleep(5)
  
-        self.browser.get('http://localhost:8000/new&location=51.00,17.00')
+        self.browser.get('http://localhost:8000/new/location=51.00,17.00')
 
         name = self.browser.find_element_by_id('id_name')
         name.send_keys('Test Place')
