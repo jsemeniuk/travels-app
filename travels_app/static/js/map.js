@@ -16,13 +16,6 @@ async function load_places() {
     return geojson;
 }
 
-async function render_places() {
-    const markers = await load_places();
-    L.geoJSON(markers)
-        .bindPopup((layer) => "<h3>" + layer.feature.properties.name + "</h3>" + "<p><a href='" + layer.feature.id + "'>View more</a></p>")
-        .addTo(map);
-}
-
 async function load_wishlist() {
     const wishlist_url = `/api/wishlist/?in_bbox=${map
         .getBounds()
@@ -45,12 +38,14 @@ function wishlistIcon (feature, latlng) {
   let myLayerOptions = {
     pointToLayer: wishlistIcon
   }
-var greenIcon = L.icon({
-    iconUrl: 'images/pink-marker-icon.png'})
 
-async function render_wishlist() {
-    const markers = await load_wishlist();
-    L.geoJSON(markers, myLayerOptions)
+async function render() {
+    const places_markers = await load_places();
+    L.geoJSON(places_markers)
+        .bindPopup((layer) => "<h3>" + layer.feature.properties.name + "</h3>" + "<p><a href='" + layer.feature.id + "'>View more</a></p>")
+        .addTo(map);
+    const wishlist_markers = await load_wishlist();
+    L.geoJSON(wishlist_markers, myLayerOptions)
         .bindPopup((layer) => "<h3>" + layer.feature.properties.name + "</h3>" + "<p><a href='" + layer.feature.id + "'>View more</a></p>")
         .addTo(map);
 }
@@ -60,7 +55,6 @@ function click_on_map(point) {
     window.location = url; 
 }
 
-map.on("moveend", render_places);
-map.on("moveend", render_wishlist);
+map.on("moveend", render);
 map.on("click", click_on_map);
 
