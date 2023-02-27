@@ -7,6 +7,8 @@ map.locate()
     .on("locationfound", (e) => map.setView(e.latlng, 8))
     .on("locationerror", () => map.setView([0, 0], 5));
 
+L.geolet({ position: 'topleft' }).addTo(map);
+
 async function load_places() {
     const places_url = `/api/visited_places/?in_bbox=${map
         .getBounds()
@@ -57,4 +59,5 @@ function click_on_map(point) {
 
 map.on("moveend", render);
 map.on("click", click_on_map);
+
 
