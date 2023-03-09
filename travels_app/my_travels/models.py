@@ -22,4 +22,8 @@ class Places(models.Model):
         default=VISTITED,
     )
 
+class ChecklistsForPlaces(models.Model):
+    item = models.CharField(max_length=100)
+    item_done = models.BooleanField(default=False)
+    place = models.ForeignKey(Places, on_delete=models.CASCADE)
 

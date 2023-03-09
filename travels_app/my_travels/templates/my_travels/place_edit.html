@@ -2,10 +2,11 @@
 {% load static %}
 
 {% block content %}
-    <h2>Edit place's details</h2>
+    <h2>Place's details</h2>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
     <br>
     <button type="submit" class="save btn btn-default">Save</button>
     </form>
+    <a href="{% url 'checklist' pk=place.pk %}"class="save btn btn-default">Add Checklist</a>
 {% endblock %}

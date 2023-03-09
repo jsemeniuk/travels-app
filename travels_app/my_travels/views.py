@@ -3,8 +3,8 @@ import json
 from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
 
-from .models import Places
-from .forms import EditPlaceForm, NewPlaceForm
+from .models import Places, ChecklistsForPlaces
+from .forms import EditPlaceForm, NewPlaceForm, PlaceChecklist
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
@@ -26,7 +26,8 @@ def handler500(request, *args, **argv):
 @login_required
 def place_detail(request, pk):
     place = get_object_or_404(Places, pk=pk)
-    return render(request, 'my_travels/place_details.html', {'place': place})
+    checklist_items = ChecklistsForPlaces.objects.filter(place=pk)
+    return render(request, 'my_travels/place_details.html', {'place': place, 'items': checklist_items})
 
 @login_required
 def place_edit(request, pk):
@@ -40,7 +41,7 @@ def place_edit(request, pk):
             return redirect("place_detail", pk=place.pk)
     else:
         form = EditPlaceForm(instance=place)
-    return render(request, 'my_travels/place_edit.html', {'form': form})
+    return render(request, 'my_travels/place_edit.html', {'form': form, 'place': place})
 
 @login_required
 def place_new(request, **kwargs):
@@ -57,6 +58,21 @@ def place_new(request, **kwargs):
     else:
         form = NewPlaceForm()
     return render(request, 'my_travels/place_edit.html', {'form': form})
+
+def add_checklist_items(request, pk):
+    place = get_object_or_404(Places, pk=pk)
+    checklist_items = ChecklistsForPlaces.objects.filter(place=pk)
+    if request.method == "POST":
+        form = PlaceChecklist(request.POST)
+        if form.is_valid():
+            item = form.save(commit=False)
+            item.place = place
+            item.save()
+            return redirect("checklist", pk=pk)
+    else:
+        form = PlaceChecklist()
+    return render(request, 'my_travels/checklist.html', {'form': form, 'place': place, 'items': checklist_items})
+
 class TravelsMapView(TemplateView):
 
     template_name = "my_travels/map.html"

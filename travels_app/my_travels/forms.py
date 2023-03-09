@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.gis import forms
-from .models import Places
+from .models import Places, ChecklistsForPlaces
 from datetime import datetime
 from django.contrib.admin import widgets 
 
@@ -23,3 +23,8 @@ class EditPlaceForm(PlaceForm):
     class Meta:
         model = Places
         fields = ("name", "visit_date", "description", "group", "location")
+
+class PlaceChecklist(forms.ModelForm):
+      class Meta:
+        model = ChecklistsForPlaces
+        fields = ("item",)
