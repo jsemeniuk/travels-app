@@ -3,14 +3,17 @@
 
 
 {% block content %}
+<div class="header">
+    <a href="{% url 'main_page' %}" class="button back-button"><span class="glyphicon glyphicon-chevron-left"></span></span></a>
+    <h2>{{ place.name }}</h2>
+    <a href="{% url 'place_edit' pk=place.pk %}"class="button"><span class="glyphicon glyphicon-pencil"></span></span></a>
+</div>
     <div class="place">
-        <h2>{{ place.name }}</h2>
-        <a class="button" href="{% url 'place_edit' pk=place.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         <p id="description">{{ place.description|linebreaksbr }}</p>
-    </div>
-    <table id="id_list_table" class="table">
+        <table id="id_list_table" class="table">
         {% for item in items %}
           <tr><td>{{ forloop.counter }}: {{ item.item }}</td></tr>
         {% endfor %}
       </table>
+    </div>
 {% endblock %}

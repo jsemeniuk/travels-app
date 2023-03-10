@@ -2,7 +2,11 @@
 {% load static %}
 
 {% block content %}
+<div class="header">
+    <a href="{% url 'place_detail' pk=place.pk %}" class="button back-button"><span class="glyphicon glyphicon-chevron-left"></span></span></a>
     <h2>Place's details</h2>
+</div>
+    
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
     <br>
