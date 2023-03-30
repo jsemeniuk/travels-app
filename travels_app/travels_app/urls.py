@@ -28,6 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/", include("my_travels.api")),
     path("", include("my_travels.urls")), 
+    path("", include("lists.urls")), 
     path('accounts/login/', views.LoginView.as_view(), name='login'),
     path('accounts/logout/', views.LogoutView.as_view(next_page='/'), name='logout'),
 ]

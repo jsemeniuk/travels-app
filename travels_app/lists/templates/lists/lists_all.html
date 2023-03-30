@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="header">
+    <h2>All lists</h2>
+</div>
+<div class="place">
+    <table id="id_list_table" class="table">
+        {% for list in lists %}
+          <tr><td><a href="{% url 'list_edit' pk=list.pk %}">{{ list.name }}</a></td></tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

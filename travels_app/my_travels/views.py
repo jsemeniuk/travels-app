@@ -3,11 +3,12 @@ import json
 from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
 
-from .models import Places, ChecklistsForPlaces
-from .forms import EditPlaceForm, NewPlaceForm, PlaceChecklist
+from .models import Places
+from .forms import EditPlaceForm, NewPlaceForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 
 def error_page(request, status_code):
     response = render(request, 'error_page.html')
@@ -26,8 +27,7 @@ def handler500(request, *args, **argv):
 @login_required
 def place_detail(request, pk):
     place = get_object_or_404(Places, pk=pk)
-    checklist_items = ChecklistsForPlaces.objects.filter(place=pk)
-    return render(request, 'my_travels/place_details.html', {'place': place, 'items': checklist_items})
+    return render(request, 'my_travels/place_details.html', {'place': place})
 
 @login_required
 def place_edit(request, pk):
@@ -57,22 +57,8 @@ def place_new(request, **kwargs):
             return redirect("place_detail", pk=place.pk)
     else:
         form = NewPlaceForm()
-    return render(request, 'my_travels/place_edit.html', {'form': form})
-
-def add_checklist_items(request, pk):
-    place = get_object_or_404(Places, pk=pk)
-    checklist_items = ChecklistsForPlaces.objects.filter(place=pk)
-    if request.method == "POST":
-        form = PlaceChecklist(request.POST)
-        if form.is_valid():
-            item = form.save(commit=False)
-            item.place = place
-            item.save()
-            return redirect("checklist", pk=pk)
-    else:
-        form = PlaceChecklist()
-    return render(request, 'my_travels/checklist.html', {'form': form, 'place': place, 'items': checklist_items})
-
+    return render(request, 'my_travels/place_add.html', {'form': form})
+    
 class TravelsMapView(TemplateView):
 
     template_name = "my_travels/map.html"

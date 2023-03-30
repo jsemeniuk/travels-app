@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_gis",
     'my_travels',
+    'lists',
 ]
 
 MIDDLEWARE = [

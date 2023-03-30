@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="header">
+    <a href="{% url 'lists_all' %}" class="button back-button"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <h2>{{ list.name }}</h2>
+</div>
+<div class="place">
+    <table id="id_list_table" class="table">
+        {% for item in items %}
+          <tr><td>{{ forloop.counter }}: {{ item.name }}</td></tr>
+        {% endfor %}
+    </table>
+</div>
+<form method="POST" class="post-form">{% csrf_token %}
+    {{ form.as_p }}
+    <br>
+    <button type="submit" class="save btn btn-default"><span class="glyphicon glyphicon-ok"></span></button>
+</form>  
+{% endblock %}
