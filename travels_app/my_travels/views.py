@@ -4,6 +4,7 @@ from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
 
 from .models import Places
+from lists.models import Lists
 from .forms import EditPlaceForm, NewPlaceForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import RequestContext
@@ -59,6 +60,15 @@ def place_new(request, **kwargs):
         form = NewPlaceForm()
     return render(request, 'my_travels/place_add.html', {'form': form})
     
+@login_required
+def place_check_list_exists(request, pk):
+    place = get_object_or_404(Places, pk=pk)
+    try:
+        list_for_place = Lists.objects.get(place_id=place).pk
+        return redirect("list_edit", pk=list_for_place)
+    except ObjectDoesNotExist:
+        return redirect("list_place_new", place_id=pk)      
+
 class TravelsMapView(TemplateView):
 
     template_name = "my_travels/map.html"

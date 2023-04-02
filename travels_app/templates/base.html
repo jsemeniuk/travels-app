@@ -16,12 +16,18 @@
 <body> 
     <div class="page-header">
         <h1><a href="{% url 'main_page' %}">Travel<br>Journal</a></h1>
-        {% if user.is_authenticated %}
-        <p class="top-menu"><a href="{% url 'logout' %}">Log out</a></small></p>
-        {% else %}
-        <p class="top-menu"><a href="{% url 'login' %}">Log in</a></p>
-        {% endif %}
     </div>
+        {% if user.is_authenticated %}
+            <ul>
+                <li><a href="{% url 'logout' %}">Log out</a></li>
+                <li><a href="{% url 'lists_all' %}">Lists</a></li>
+            </ul>
+        {% else %}
+            <ul>
+                <li><a href="{% url 'login' %}">Log in</a></li>
+            </ul>
+        {% endif %}
+    
     {% block content %}
     {% endblock %}               
 </body>

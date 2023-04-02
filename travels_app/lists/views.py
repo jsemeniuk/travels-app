@@ -1,16 +1,19 @@
 from .models import Lists, Items
 from .forms import ManageItems, ManageLists
+from my_travels.models import Places
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 
 @login_required
-def add_list(request):
+def add_list(request, **kwargs):
     if request.method == "POST":
         form = ManageLists(request.POST)
         if form.is_valid():
             new_list = form.save(commit=False)
+            if kwargs['place_id']:
+                new_list.place_id = get_object_or_404(Places, pk=kwargs['place_id'])
             new_list.save()
             return redirect("list_edit", pk=new_list.pk)
     else:

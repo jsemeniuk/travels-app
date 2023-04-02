@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from my_travels.views import TravelsMapView
 from django.contrib.auth import views
 from django.conf.urls import handler404
+from lists.views import lists_all
 
 handler404 = 'my_travels.views.handler404'
 handler400 = 'my_travels.views.handler400'
@@ -29,6 +29,7 @@ urlpatterns = [
     path("api/", include("my_travels.api")),
     path("", include("my_travels.urls")), 
     path("", include("lists.urls")), 
+    path('lists', lists_all, name='lists_all'),
     path('accounts/login/', views.LoginView.as_view(), name='login'),
     path('accounts/logout/', views.LogoutView.as_view(next_page='/'), name='logout'),
 ]
