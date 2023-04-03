@@ -7,10 +7,15 @@
     <a href="{% url 'list_new' %}" class="button back-button"><span class="glyphicon glyphicon-plus"></span></a>
 </div>
 <div class="place">
+{% if not lists %}
+    <p>No lists found</p>
+{% else %}
+
     <table id="id_list_table" class="table">
         {% for list in lists %}
           <tr><td><a href="{% url 'list_edit' pk=list.pk %}">{{ list.name }}</a></td></tr>
         {% endfor %}
     </table>
 </div>
+{% endif %}
 {% endblock %}

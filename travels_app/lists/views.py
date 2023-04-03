@@ -12,6 +12,7 @@ def add_list(request, **kwargs):
         form = ManageLists(request.POST)
         if form.is_valid():
             new_list = form.save(commit=False)
+            new_list.user = request.user
             if kwargs['place_id']:
                 new_list.place_id = get_object_or_404(Places, pk=kwargs['place_id'])
             new_list.save()
@@ -37,5 +38,7 @@ def add_items(request, pk):
 
 @login_required
 def lists_all(request):
-    lists_all = Lists.objects.filter()
+    lists_all = Lists.objects.filter(user=request.user)
+    if len(lists_all) == 0:
+        lists_all = False
     return render(request, 'lists/lists_all.html', {'lists': lists_all})
