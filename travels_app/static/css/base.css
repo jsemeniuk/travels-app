@@ -21,10 +21,8 @@ body {
 
 .page-header{
     background-color: #ff00d2;
-    margin-top: 0;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    padding: 5px 20px 10px 55px;
+    margin: 0 0 0 0;
+    padding: 1px 0px 0px 55px;
 }
 
 .top-menu {
@@ -44,7 +42,8 @@ body {
 h1, h1 a {
     font-family: 'Lobster', cursive;
     color: #ffffff;
-    font-size: 30pt;
+    font-size: 20pt;
+    vertical-align: middle;
 }
 
 h2 {
