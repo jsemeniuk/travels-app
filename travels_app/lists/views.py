@@ -32,7 +32,7 @@ def add_items(request, pk):
             item.save()
             return redirect("list_edit", pk=pk)
     else:
-        form = ManageItems(request.POST)
+        form = ManageItems()
     return render(request, 'lists/list_edit.html', {'list': list_to_edit, 'form': form, 'items': list_items})
 
 @login_required
