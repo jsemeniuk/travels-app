@@ -7,17 +7,14 @@ import string
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
-from .helpers import add_new_place, add_new_user
-
 class AddEditPlaceTest(FunctionalTest):
 #TODO write helpers function to make code clearer (i.e type function)
 #TODO move actions repeatable between test to separate function 
 #TODO create test setup for each test: add new user and new place for user
     def test_add_place(self):
-        user = User.objects.filter(username='TestUser')[0]
         self.browser = webdriver.Chrome()
         self.browser.get('http://localhost:8000')
-        log_in = self.browser.find_element_by_css_selector('.top-menu a[href*=login]')
+        log_in = self.browser.find_element_by_css_selector('li a[href*=login]')
         log_in.click()
         username = self.browser.find_element_by_id('id_username')
         username.send_keys('TestUser')
@@ -41,15 +38,13 @@ class AddEditPlaceTest(FunctionalTest):
         save_button = self.browser.find_element_by_css_selector('.save')
         save_button.click()
 
-        place_title = self.browser.find_element_by_css_selector('.place h2')
+        place_title = self.browser.find_element_by_css_selector('.header h2')
         self.assertEqual(place_title.text, 'Test Place')
 
     def test_view_place(self):
-        
-        user = User.objects.filter(username='TestUser')[0]
         self.browser = webdriver.Chrome()
         self.browser.get('http://localhost:8000')
-        log_in = self.browser.find_element_by_css_selector('.top-menu a[href*=login]')
+        log_in = self.browser.find_element_by_css_selector('li a[href*=login]')
         log_in.click()
         username = self.browser.find_element_by_id('id_username')
         username.send_keys('TestUser')
@@ -67,13 +62,13 @@ class AddEditPlaceTest(FunctionalTest):
         popup_link = self.browser.find_element_by_css_selector('.leaflet-popup-content a')
         popup_link.click()
 
-        place_title = self.browser.find_element_by_css_selector('.place h2')
+        place_title = self.browser.find_element_by_css_selector('.header h2')
         self.assertEqual(place_title.text, 'Borowa')
 
     def test_edit_place(self):
         self.browser = webdriver.Chrome()
         self.browser.get('http://localhost:8000')
-        log_in = self.browser.find_element_by_css_selector('.top-menu a[href*=login]')
+        log_in = self.browser.find_element_by_css_selector('li a[href*=login]')
         log_in.click()
         username = self.browser.find_element_by_id('id_username')
         username.send_keys('TestUser')
@@ -102,7 +97,7 @@ class AddEditPlaceTest(FunctionalTest):
         save_button = self.browser.find_element_by_css_selector('.save')
         save_button.click()
 
-        place_title = self.browser.find_element_by_css_selector('.place h2')
+        place_title = self.browser.find_element_by_css_selector('.header h2')
         self.assertEqual(place_title.text, new_name)
 
         description_field = self.browser.find_element_by_id('description')
