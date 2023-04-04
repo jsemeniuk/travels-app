@@ -13,7 +13,7 @@ def add_list(request, **kwargs):
         if form.is_valid():
             new_list = form.save(commit=False)
             new_list.user = request.user
-            if kwargs['place_id']:
+            if 'place_id' in kwargs:
                 new_list.place_id = get_object_or_404(Places, pk=kwargs['place_id'])
             new_list.save()
             return redirect("list_edit", pk=new_list.pk)
