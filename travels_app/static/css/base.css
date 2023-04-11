@@ -97,3 +97,9 @@ ul {
     display: block;
     padding: 8px;
   }
+
+  .save-button {
+    padding: 0;
+    border: none;
+    background: none;
+  }
