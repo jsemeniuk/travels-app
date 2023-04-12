@@ -5,6 +5,7 @@
 <div class="header">
     <a href="{% url 'lists_all' %}" class="button back-button"><span class="glyphicon glyphicon-chevron-left"></span></a>
     <h2>{{ list.name }}</h2>
+    <a href="{% url 'edit_list_name' pk=list.pk %}" class="button edit-button"><span class="glyphicon glyphicon-pencil"></span></a>
     <a href="{% url 'delete_list' pk=list.pk  %}" class="button delete-button"><span class="glyphicon glyphicon-minus"></span></a>
 </div>
 <div class="place">

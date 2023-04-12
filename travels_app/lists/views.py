@@ -81,3 +81,16 @@ def delete_list(request, pk):
     elif request.method == "POST": 
         list_to_edit.delete()
         return redirect("lists_all")
+
+def edit_list_name(request, pk):
+    list_to_edit = get_object_or_404(Lists, pk=pk)
+    if request.method == "POST":
+        form = ManageLists(request.POST, instance=list_to_edit)
+        if form.is_valid():
+            new_list = form.save(commit=False)
+            new_list.user = request.user
+            new_list.save()
+            return redirect("list_edit", pk=pk)
+    else:
+        form = ManageLists(instance=list_to_edit)
+    return render(request, 'lists/list_new.html', {'form': form})
