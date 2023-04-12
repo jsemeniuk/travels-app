@@ -5,6 +5,7 @@
 <div class="header">
     <a href="{% url 'lists_all' %}" class="button back-button"><span class="glyphicon glyphicon-chevron-left"></span></a>
     <h2>{{ list.name }}</h2>
+    <a href="{% url 'delete_list' pk=list.pk  %}" class="button delete-button"><span class="glyphicon glyphicon-minus"></span></a>
 </div>
 <div class="place">
     <table id="id_list_table" class="table">
@@ -21,6 +22,7 @@
             <tr>
                 <td><input type="checkbox" name="item" id="item_{{ forloop.counter }}" onclick="return false;"  {% if item.item_done %}checked{% endif %}><text>{{ item.name }}</text></td>
                 <td><a href="{% url 'list_edit_item' pk=list.pk  item_to_edit=item.pk %}" class="button edit-button"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                <td><a href="{% url 'delete_item' pk=item.pk  %}" class="button delete-button"><span class="glyphicon glyphicon-minus"></span></a></td>
             </tr>
             {% endif %}
         {% endfor %}

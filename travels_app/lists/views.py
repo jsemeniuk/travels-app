@@ -62,3 +62,22 @@ def lists_all(request):
     if len(lists_all) == 0:
         lists_all = False
     return render(request, 'lists/lists_all.html', {'lists': lists_all})
+
+@login_required
+def delete_item(request, pk):
+    item = get_object_or_404(Items, pk=pk)
+    list_pk = item.list_id.pk
+    if request.method == 'GET':
+        return render(request, 'lists/confirm_delete.html', {'elem_to_delete': item, 'pk': list_pk})
+    elif request.method == "POST": 
+        item.delete()
+        return redirect("list_edit", pk=list_pk)
+
+@login_required
+def delete_list(request, pk):
+    list_to_edit = get_object_or_404(Lists, pk=pk)
+    if request.method == 'GET':
+        return render(request, 'lists/confirm_delete.html', {'elem_to_delete': list_to_edit, 'pk': pk})
+    elif request.method == "POST": 
+        list_to_edit.delete()
+        return redirect("lists_all")
