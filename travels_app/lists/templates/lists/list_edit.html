@@ -9,19 +9,26 @@
 <div class="place">
     <table id="id_list_table" class="table">
         {% for item in items %}
-            <tr><td>
-            {% if item.item_done %}
-                <input type="checkbox" name="item" id="item_{{ forloop.counter }}" checked>
-            {% else %}
-                <input type="checkbox" name="item" id="item_{{ forloop.counter }}"> 
-            {% endif %}
-            <text>{{ item.name }}</text></td>
+            {% if form_edit and item == edit_item %}
+            <tr>
+                <form method="POST" class="post-form">
+                    <td>{{ form_edit.item_done}} {{ form_edit.name}}</td>
+                    {% csrf_token %}
+                    <td><button type="submit" name="edit-button" class="button save-button"><span class="glyphicon glyphicon-ok"></span></button></td>
+                </form>  
             </tr>
+            {% else %}
+            <tr>
+                <td><input type="checkbox" name="item" id="item_{{ forloop.counter }}" onclick="return false;"  {% if item.item_done %}checked{% endif %}><text>{{ item.name }}</text></td>
+                <td><a href="{% url 'list_edit_item' pk=list.pk  item_to_edit=item.pk %}" class="button edit-button"><span class="glyphicon glyphicon-pencil"></span></a></td>
+            </tr>
+            {% endif %}
         {% endfor %}
         <tr>
-            <form method="POST" class="post-form">{% csrf_token %}
+            <form method="POST" class="post-form">
                 <td>{{ form.item_done}} {{ form.name}}</td>
-                <td><button type="submit" class="button save-button"><span class="glyphicon glyphicon-ok"></span></button></td>
+                {% csrf_token %}
+                <td><button type="submit" name="save-button" class="button save-button"><span class="glyphicon glyphicon-ok"></span></button></td>
             </form>  
         </tr>
     </table>
