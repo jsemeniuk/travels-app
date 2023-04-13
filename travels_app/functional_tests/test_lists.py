@@ -32,7 +32,7 @@ class AddEditListsTest(FunctionalTest):
         list_name = self.browser.find_element_by_id('id_name')
         list_name.send_keys('New list test')
 
-        save_button = self.browser.find_element_by_css_selector('.save')
+        save_button = self.browser.find_element_by_css_selector('.save-button')
         save_button.click()
 
         list_name = self.browser.find_element_by_css_selector('.header h2')
@@ -94,7 +94,7 @@ class AddEditListsTest(FunctionalTest):
         list_name = self.browser.find_element_by_id('id_name')
         list_name.send_keys('New list for place')
 
-        save_button = self.browser.find_element_by_css_selector('.save')
+        save_button = self.browser.find_element_by_css_selector('.save-button')
         save_button.click()
 
         list_name = self.browser.find_element_by_css_selector('.header h2')

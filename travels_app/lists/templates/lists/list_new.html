@@ -5,9 +5,15 @@
 <div class="header">
     <h2>Add list</h2>
 </div>
-<form method="POST" class="post-form">{% csrf_token %}
-    {{ form.as_p }}
-    <br>
-    <button type="submit" class="save btn btn-default"><span class="glyphicon glyphicon-ok"></span></button>
-</form> 
+<div class="list">
+<table id="id_new_list_table" class="table">
+    <tr>
+        <form method="POST" class="post-form">
+            {% csrf_token %}
+            <td>List name: {{ form.name}}</td>
+            <td><button type="submit" name="save-button" class="button save-button"><span class="glyphicon glyphicon-ok"></span></button></td>
+        </form>  
+    </tr>
+</table>
+</div>
 {% endblock %}

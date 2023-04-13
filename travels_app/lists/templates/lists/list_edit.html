@@ -8,13 +8,13 @@
     <a href="{% url 'edit_list_name' pk=list.pk %}" class="button edit-button"><span class="glyphicon glyphicon-pencil"></span></a>
     <a href="{% url 'delete_list' pk=list.pk  %}" class="button delete-button"><span class="glyphicon glyphicon-minus"></span></a>
 </div>
-<div class="place">
+<div class="list">
     <table id="id_list_table" class="table">
         {% for item in items %}
             {% if form_edit and item == edit_item %}
             <tr>
                 <form method="POST" class="post-form">
-                    <td>{{ form_edit.item_done}} {{ form_edit.name}}</td>
+                    <td>{{ form_edit.item_done }} {{ form_edit.name}}</td>
                     {% csrf_token %}
                     <td><button type="submit" name="edit-button" class="button save-button"><span class="glyphicon glyphicon-ok"></span></button></td>
                 </form>  
