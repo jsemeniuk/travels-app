@@ -1,5 +1,5 @@
 from .base import FunctionalTest
-from .setup import add_new_user, add_new_place, delete_user
+from .setup import add_new_user, add_new_place, delete_user, add_new_list, add_item_to_list
 from selenium import webdriver
 from django.contrib.auth.models import User
 from time import sleep
@@ -15,6 +15,7 @@ class AddEditListsTest(FunctionalTest):
 
     def add_list(self, list_name: str):
         list_name_field = self.browser.find_element_by_id('id_name')
+        list_name_field.clear()
         list_name_field.send_keys(list_name)
 
         save_button = self.browser.find_element_by_css_selector('.save-button')
@@ -77,6 +78,110 @@ class AddEditListsTest(FunctionalTest):
         add_list_button.click()
 
         self.add_list('New list test')
+
+        delete_user(user)
+
+    def test_edit_list(self):
+        user_details = add_new_user()
+        username = user_details[0]
+        password = user_details[1]
+        user = user_details[2]
+
+        new_list = add_new_list(user, 'New List')
+        new_list_id = new_list.pk
+
+        self.log_in(username, password)
+        self.browser.get(f'http://localhost:8000/list/{new_list_id}')
+
+        edit_list_button = self.browser.find_element_by_css_selector(".header .edit-button")
+        edit_list_button.click()
+
+        self.add_list('Very new list name')
+
+        delete_user(user)
+
+    def test_delete_list(self):
+        user_details = add_new_user()
+        username = user_details[0]
+        password = user_details[1]
+        user = user_details[2]
+
+        new_list = add_new_list(user, 'New List')
+        new_list_id = new_list.pk
+
+        self.log_in(username, password)
+        self.browser.get(f'http://localhost:8000/list/{new_list_id}')
+
+        delete_list_button = self.browser.find_element_by_css_selector(".header .delete-button")
+        delete_list_button.click()
+
+        delete_confirmation_button = self.browser.find_element_by_css_selector('.save')
+        delete_confirmation_button.click()
+
+        lists_search_result = self.browser.find_element_by_css_selector('.list p')
+        self.assertEqual(lists_search_result.text, 'No lists found')
+
+        delete_user(user)
+
+    def test_edit_item(self):
+        user_details = add_new_user()
+        username = user_details[0]
+        password = user_details[1]
+        user = user_details[2]
+
+        new_list = add_new_list(user, 'New List')
+        new_list_id = new_list.pk
+
+        add_item_to_list(new_list, 'First item')
+        add_item_to_list(new_list, 'Second item')
+
+        self.log_in(username, password)
+        self.browser.get(f'http://localhost:8000/list/{new_list_id}')
+
+        first_item_edit_button = self.browser.find_element_by_css_selector('#id_list_table tr:first-child .glyphicon-pencil')
+        first_item_edit_button.click()
+        first_item_name_edit = self.browser.find_element_by_css_selector('#id_list_table tr:first-child #id_name')
+        first_item_name_edit.clear()
+        first_item_name_edit.send_keys('New name for first item')
+        save_edit_button = self.browser.find_element_by_css_selector('[name=edit-button]')
+        save_edit_button.click()
+        new_first_item_name = self.browser.find_element_by_css_selector('#id_list_table tr:nth-child(2) text')
+        self.assertEqual(new_first_item_name.text, 'New name for first item')
+
+        second_item_edit_button = self.browser.find_element_by_css_selector('#id_list_table tr:first-child .glyphicon-pencil')
+        second_item_edit_button.click()
+        second_item_checkbox_edit = self.browser.find_element_by_css_selector('#id_list_table tr:first-child #id_item_done')
+        second_item_checkbox_edit.click()
+        save_edit_button = self.browser.find_element_by_css_selector('[name=edit-button]')
+        save_edit_button.click()
+        new_second_item_checkbox = self.browser.find_element_by_css_selector('#item_2')
+        self.assertEqual(new_second_item_checkbox.get_attribute("checked"), "true")
+
+        delete_user(user)
+
+    def test_delete_item(self):
+        user_details = add_new_user()
+        username = user_details[0]
+        password = user_details[1]
+        user = user_details[2]
+
+        new_list = add_new_list(user, 'New List')
+        new_list_id = new_list.pk
+
+        add_item_to_list(new_list, 'This will be deleted')
+        add_item_to_list(new_list, 'This should stay')
+
+        self.log_in(username, password)
+        self.browser.get(f'http://localhost:8000/list/{new_list_id}')
+
+        delete_item_button = self.browser.find_element_by_css_selector("#id_list_table tr:first-child .glyphicon-minus")
+        delete_item_button.click()
+
+        delete_confirmation_button = self.browser.find_element_by_css_selector('.save')
+        delete_confirmation_button.click()
+
+        first_item_name = self.browser.find_element_by_css_selector('#id_list_table tr:first-child text')
+        self.assertEqual(first_item_name.text, 'This should stay')
 
         delete_user(user)
 

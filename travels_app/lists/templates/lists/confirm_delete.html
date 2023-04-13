@@ -9,7 +9,7 @@
     {% csrf_token %}
     <p>Are you sure that you want to delete <strong>{{elem_to_delete.name}}</strong>?</p>
     <div>
-        <button type="submit">Yes, Delete</button>
+        <button type="submit" class="save btn btn-default">Yes, Delete</button>
         <a href="{% url 'list_edit' pk %}">Cancel</a>
     </div>
 </form> 
