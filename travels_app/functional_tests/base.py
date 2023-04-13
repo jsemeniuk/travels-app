@@ -2,8 +2,8 @@ from selenium import webdriver
 from django.test import TestCase
 import unittest
 from time import sleep
-from datetime import datetime
-from my_travels.models import Places
+
+from .setup import add_new_user, delete_user
 
 from django.contrib.auth.models import User
 
@@ -13,9 +13,14 @@ class FunctionalTest(unittest.TestCase):
     def setUp(self):
         self.browser = webdriver.Chrome()
         self.browser.get('http://localhost:8000')
+        user_details = add_new_user()
+        self.username = user_details[0]
+        self.password = user_details[1]
+        self.user = user_details[2]
         
     def tearDown(self):
         self.browser.quit()
+        delete_user(self.user)
 
     def log_in(self, username, password):
         login_link = self.browser.find_element_by_css_selector('li a[href*=login]')

@@ -10,8 +10,6 @@ from selenium.webdriver.common.keys import Keys
 
 class AddEditListsTest(FunctionalTest):
 #TODO write helpers function to make code clearer (i.e type function)
-#TODO move actions repeatable between test to separate function 
-#TODO create test setup for each test: add new user / new place / new list
 
     def add_list(self, list_name: str):
         list_name_field = self.browser.find_element_by_id('id_name')
@@ -42,12 +40,7 @@ class AddEditListsTest(FunctionalTest):
             self.assertEqual(item_added_checkobox.get_attribute("checked"), None)
 
     def test_add_list(self):
-        user_details = add_new_user()
-        username = user_details[0]
-        password = user_details[1]
-        user = user_details[2]
-
-        self.log_in(username, password)
+        self.log_in(self.username, self.password)
 
         lists_link = self.browser.find_element_by_css_selector('a[href*=lists]')
         lists_link.click()
@@ -59,17 +52,10 @@ class AddEditListsTest(FunctionalTest):
         self.add_item('Checked item', True, 1)
         self.add_item('Unchecked item', False, 2)
 
-        delete_user(user)
-
     def test_add_list_for_place(self):
-        user_details = add_new_user()
-        username = user_details[0]
-        password = user_details[1]
-        user = user_details[2]
+        place_id = add_new_place(self.user)
 
-        place_id = add_new_place(user)
-
-        self.log_in(username, password)
+        self.log_in(self.username, self.password)
         self.browser.get(f'http://localhost:8000/{place_id}')
         edit_button = self.browser.find_element_by_css_selector('.glyphicon-pencil')
         edit_button.click()
@@ -79,18 +65,11 @@ class AddEditListsTest(FunctionalTest):
 
         self.add_list('New list test')
 
-        delete_user(user)
-
     def test_edit_list(self):
-        user_details = add_new_user()
-        username = user_details[0]
-        password = user_details[1]
-        user = user_details[2]
-
-        new_list = add_new_list(user, 'New List')
+        new_list = add_new_list(self.user, 'New List')
         new_list_id = new_list.pk
 
-        self.log_in(username, password)
+        self.log_in(self.username, self.password)
         self.browser.get(f'http://localhost:8000/list/{new_list_id}')
 
         edit_list_button = self.browser.find_element_by_css_selector(".header .edit-button")
@@ -98,18 +77,11 @@ class AddEditListsTest(FunctionalTest):
 
         self.add_list('Very new list name')
 
-        delete_user(user)
-
     def test_delete_list(self):
-        user_details = add_new_user()
-        username = user_details[0]
-        password = user_details[1]
-        user = user_details[2]
-
-        new_list = add_new_list(user, 'New List')
+        new_list = add_new_list(self.user, 'New List')
         new_list_id = new_list.pk
 
-        self.log_in(username, password)
+        self.log_in(self.username, self.password)
         self.browser.get(f'http://localhost:8000/list/{new_list_id}')
 
         delete_list_button = self.browser.find_element_by_css_selector(".header .delete-button")
@@ -121,21 +93,14 @@ class AddEditListsTest(FunctionalTest):
         lists_search_result = self.browser.find_element_by_css_selector('.list p')
         self.assertEqual(lists_search_result.text, 'No lists found')
 
-        delete_user(user)
-
     def test_edit_item(self):
-        user_details = add_new_user()
-        username = user_details[0]
-        password = user_details[1]
-        user = user_details[2]
-
-        new_list = add_new_list(user, 'New List')
+        new_list = add_new_list(self.user, 'New List')
         new_list_id = new_list.pk
 
         add_item_to_list(new_list, 'First item')
         add_item_to_list(new_list, 'Second item')
 
-        self.log_in(username, password)
+        self.log_in(self.username, self.password)
         self.browser.get(f'http://localhost:8000/list/{new_list_id}')
 
         first_item_edit_button = self.browser.find_element_by_css_selector('#id_list_table tr:first-child .glyphicon-pencil')
@@ -157,21 +122,14 @@ class AddEditListsTest(FunctionalTest):
         new_second_item_checkbox = self.browser.find_element_by_css_selector('#item_2')
         self.assertEqual(new_second_item_checkbox.get_attribute("checked"), "true")
 
-        delete_user(user)
-
     def test_delete_item(self):
-        user_details = add_new_user()
-        username = user_details[0]
-        password = user_details[1]
-        user = user_details[2]
-
-        new_list = add_new_list(user, 'New List')
+        new_list = add_new_list(self.user, 'New List')
         new_list_id = new_list.pk
 
         add_item_to_list(new_list, 'This will be deleted')
         add_item_to_list(new_list, 'This should stay')
 
-        self.log_in(username, password)
+        self.log_in(self.username, self.password)
         self.browser.get(f'http://localhost:8000/list/{new_list_id}')
 
         delete_item_button = self.browser.find_element_by_css_selector("#id_list_table tr:first-child .glyphicon-minus")
@@ -182,9 +140,6 @@ class AddEditListsTest(FunctionalTest):
 
         first_item_name = self.browser.find_element_by_css_selector('#id_list_table tr:first-child text')
         self.assertEqual(first_item_name.text, 'This should stay')
-
-        delete_user(user)
-
 
 
 
