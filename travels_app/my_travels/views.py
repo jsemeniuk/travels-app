@@ -3,9 +3,9 @@ import json
 from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
 
-from .models import Places
+from .models import Places, Tag
 from lists.models import Lists
-from .forms import EditPlaceForm, NewPlaceForm
+from .forms import EditPlaceForm, NewPlaceForm, TagForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
@@ -26,9 +26,29 @@ def handler500(request, *args, **argv):
     return error_page(request, 500)
 
 @login_required
+def places_all(request):
+    places_all = []
+    for place in Places.objects.filter(user=request.user):
+        if place.group == 'AV':
+            status = 'Visited'
+        elif place.group == 'WI':
+            status = 'Wishlist'
+        places_all.append({'name':place.name, 
+                           'group': status, 
+                           'pk': place.pk, 
+                           'tags': [tag.tag for tag in place.tag.all()]})
+    if len(places_all) == 0:
+        places_all = False
+    return render(request, 'my_travels/places_all.html', {'places': places_all})
+
+@login_required
 def place_detail(request, pk):
     place = get_object_or_404(Places, pk=pk)
-    return render(request, 'my_travels/place_details.html', {'place': place})
+    tags = place.tag.all()
+    if len(tags) > 0:
+        return render(request, 'my_travels/place_details.html', {'place': place, 'tags': tags})
+    else:
+        return render(request, 'my_travels/place_details.html', {'place': place})
 
 @login_required
 def place_edit(request, pk):
@@ -68,6 +88,19 @@ def place_check_list_exists(request, pk):
         return redirect("list_edit", pk=list_for_place)
     except ObjectDoesNotExist:
         return redirect("list_place_new", place_id=pk)      
+
+
+def add_tag(request, **kwargs):
+    if request.method == "POST":
+        form = TagForm(request.POST)
+        if form.is_valid():
+            tag = form.save(commit=False)
+            tag.user = request.user
+            tag.save()
+            return redirect("place_edit", pk=kwargs['pk'])
+    else:
+        form = TagForm()
+    return render(request, 'my_travels/tag.html', {'form': form})
 
 class TravelsMapView(TemplateView):
 

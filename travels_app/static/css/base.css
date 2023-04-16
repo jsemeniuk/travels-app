@@ -111,3 +111,7 @@ ul {
   #id_new_list_table  #id_name, #id_list_table #id_name{
     width: 80%
   }
+
+  #place-edit-table td:first-child{
+    width: 150px
+  }

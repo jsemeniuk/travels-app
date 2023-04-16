@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="header">
+    <h2>Add tag</h2>
+</div>
+<div class="list">
+<table id="id_new_list_table" class="table">
+    <tr>
+        <form method="POST" class="post-form">
+            {% csrf_token %}
+            <td>New Tag: {{ form.tag}}</td>
+            <td><button type="submit" name="save-button" class="button save-button"><span class="glyphicon glyphicon-ok"></span></button></td>
+        </form>  
+    </tr>
+</table>
+</div>
+{% endblock %}

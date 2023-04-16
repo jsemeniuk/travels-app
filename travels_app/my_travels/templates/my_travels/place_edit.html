@@ -6,11 +6,33 @@
     <a href="{% url 'place_detail' pk=place.pk %}" class="button back-button"><span class="glyphicon glyphicon-chevron-left"></span></a>
     <h2>Place's details</h2>
 </div>
-    
     <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-    <br>
-    <button type="submit" class="save btn btn-default">Save</button>
+        <table id="place-edit-table" class="table">
+            <tr>
+                <td colspan="2"><strong>Name: </strong> {{ form.name }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><strong>Date: </strong> {{ form.visit_date }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><strong>Description: </strong>{{ form.description }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><strong>Group: </strong>{{ form.group }}</td>
+            </tr>
+            <tr>
+                <td><strong>Tags: </strong>{{ form.tag }}</td>
+                <td><a href="{% url 'add_tag' pk=place.pk%}" class="button back-button"><span class="glyphicon glyphicon-plus"></span></a></td>
+            </tr>
+            <tr>
+                <td colspan="2"><a href="{% url 'place_check_list_exists' pk=place.pk %}">Lists</a></td>
+            </tr>
+            <tr>
+                <td colspan="2">{{ form.location }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit" class="save btn btn-default">Save</button></td>
+            </tr>
+        </table>
     </form>
-    <a href="{% url 'place_check_list_exists' pk=place.pk %}"class="save btn btn-default">Lists</a>
 {% endblock %}

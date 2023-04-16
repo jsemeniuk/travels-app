@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="header">
+    <h2>Places</h2>
+</div>
+<div class="list">
+{% if not places %}
+    <p>No places found</p>
+{% else %}
+    <table id="id_list_table" class="table">
+        <tr>
+            <th>Place</th>
+            <th>Status</th>
+            <th>Tags</th>
+        </tr>
+        {% for place in places %}
+          <tr>
+            <td><a href="{% url 'place_detail' pk=place.pk %}">{{ place.name }}</a></td>
+            <td>{{ place.group }}</td>
+            <td>{% for tag in place.tags %}{{ tag }}, {% endfor %}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,6 +1,6 @@
 from django import forms 
 from django.contrib.gis import forms
-from .models import Places
+from .models import Places, Tag
 from datetime import datetime
 from django.contrib.admin import widgets 
 
@@ -15,11 +15,17 @@ class PlaceForm(forms.ModelForm):
 class NewPlaceForm(PlaceForm):
     class Meta:
         model = Places
-        fields = ("name", "visit_date", "description", "group")
+        fields = ("name", "visit_date", "description", "group", 'tag')
 
 class EditPlaceForm(PlaceForm):
     location = forms.PointField(widget=
         forms.OSMWidget(attrs={'map_height': 500}))
     class Meta:
         model = Places
-        fields = ("name", "visit_date", "description", "group", "location")
+        fields = ("name", "visit_date", "description", "group", "tag", "location")
+
+
+class TagForm(forms.ModelForm):
+    class Meta:
+        model = Tag
+        fields = ("tag", )

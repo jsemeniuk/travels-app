@@ -10,5 +10,9 @@
 </div>
     <div class="place">
         <p id="description">{{ place.description|linebreaksbr }}</p>
+        {% if tags %}
+            <p><strong>Tags:</strong></p>
+            <p>{% for tag in tags %}{{ tag.tag }}, {% endfor %}</p>
+        {% endif %}
     </div>
 {% endblock %}

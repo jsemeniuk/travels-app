@@ -4,6 +4,13 @@ from django.db import models as dbmodels
 
 User= settings.AUTH_USER_MODEL
 
+class Tag(dbmodels.Model):
+    tag = dbmodels.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return self.tag
+
 class Places(models.Model):
     name = models.CharField(max_length=100)
     location = models.PointField()
@@ -21,6 +28,11 @@ class Places(models.Model):
         choices=GROUP_CHOICES,
         default=VISTITED,
     )
+    tag = dbmodels.ManyToManyField(Tag, blank=True)
+
+    def __str__(self):
+        return self.name
+
 
 
 
