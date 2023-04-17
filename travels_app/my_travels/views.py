@@ -2,6 +2,7 @@ import json
 
 from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
+from django.views.generic.list import  ListView
 
 from .models import Places, Tag
 from lists.models import Lists
@@ -10,6 +11,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
+
 
 def error_page(request, status_code):
     response = render(request, 'error_page.html')
@@ -25,21 +28,6 @@ def handler400(request, *args, **argv):
 def handler500(request, *args, **argv):
     return error_page(request, 500)
 
-@login_required
-def places_all(request):
-    places_all = []
-    for place in Places.objects.filter(user=request.user):
-        if place.group == 'AV':
-            status = 'Visited'
-        elif place.group == 'WI':
-            status = 'Wishlist'
-        places_all.append({'name':place.name, 
-                           'group': status, 
-                           'pk': place.pk, 
-                           'tags': [tag.tag for tag in place.tag.all()]})
-    if len(places_all) == 0:
-        places_all = False
-    return render(request, 'my_travels/places_all.html', {'places': places_all})
 
 @login_required
 def place_detail(request, pk):
@@ -116,3 +104,28 @@ class TravelsMapView(TemplateView):
         context["visited_places"] = json.loads(serialize("geojson", Places.objects.all()))
         context["wishlist"] = json.loads(serialize("geojson", Places.objects.all()))
         return context 
+
+class SearchResultsList(ListView):
+    model = Places
+    context_object_name = "places"
+    template_name = "my_travels/places_all.html"
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        places_all = []
+        if query != None:
+            places = Places.objects.filter(user=self.request.user).filter(Q(name__icontains=query))
+        else:
+            places = Places.objects.filter(user=self.request.user)
+        for place in places:
+            if place.group == 'AV':
+                status = 'Visited'
+            elif place.group == 'WI':
+                status = 'Wishlist'
+            places_all.append({'name':place.name, 
+                               'group': status, 
+                               'pk': place.pk, 
+                               'tags': [tag.tag for tag in place.tag.all()]})
+        if len(places_all) == 0:
+            places_all = False
+        return places_all

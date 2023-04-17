@@ -5,13 +5,31 @@
 <div class="header">
     <h2>Places</h2>
 </div>
+<form action="{% url 'places_all' %}" method="get">
+    <table id="id_list_table" class="table">
+        <tr>
+            <td>
+                <input
+                    type="search"
+                    name="q"
+                    placeholder="Search for place name"
+                    class="form-control"
+                />
+            </td>
+            <td>
+                <button class="clear-button"><a href="{% url 'places_all' %}">Clear</a></button>
+            </td>
+        </tr>
+    </table>
+</form>
+</br>
 <div class="list">
 {% if not places %}
     <p>No places found</p>
 {% else %}
     <table id="id_list_table" class="table">
         <tr>
-            <th>Place</th>
+            <th>Name</th>
             <th>Status</th>
             <th>Tags</th>
         </tr>
@@ -25,4 +43,4 @@
     </table>
 </div>
 {% endif %}
-{% endblock %}
+{% endblock %} 

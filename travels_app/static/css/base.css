@@ -98,7 +98,7 @@ ul {
     padding: 8px;
   }
 
-  .save-button {
+  .save-button, .clear-button {
     padding: 0;
     border: none;
     background: none;
