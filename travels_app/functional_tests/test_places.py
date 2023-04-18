@@ -71,6 +71,27 @@ class AddEditPlaceTest(FunctionalTest):
         description_field = self.browser.find_element_by_id('description')
         self.assertEqual(description_field.text, new_description)
 
+    def test_delete_place(self):
+        place_id = add_new_place(self.user)
 
+        self.log_in(self.username, self.password)
 
+        self.browser.get(f'http://localhost:8000/{place_id}/')
+
+        edit_button = self.browser.find_element_by_css_selector('.glyphicon-pencil')
+        edit_button.click()
+
+        delete_button = self.browser.find_element_by_css_selector('.glyphicon-minus')
+        delete_button.click()
+
+        delete_confirmation_button = self.browser.find_element_by_css_selector('.save')
+        delete_confirmation_button.click()
+
+        self.browser.find_element_by_id('map')
+        sleep(5)
+
+        pins = self.browser.find_elements_by_css_selector('#map .leaflet-marker-pane img:first-child')
+
+        if len(pins) > 0:
+            raise Exception('Place not deleted')
     
