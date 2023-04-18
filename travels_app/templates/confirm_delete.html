@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="header">
+    <h2>Delete</h2>
+</div>
+<form method="POST" class="post-form">
+    {% csrf_token %}
+    <p>Are you sure that you want to delete <strong>{{elem_to_delete.name}}</strong>?</p>
+    <div>
+        <button type="submit" class="save btn btn-default">Yes, Delete</button>
+       {% block back_link %}{% endblock %}
+    </div>
+</form> 
+{% endblock %}

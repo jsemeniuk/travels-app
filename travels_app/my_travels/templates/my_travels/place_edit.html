@@ -5,6 +5,7 @@
 <div class="header">
     <a href="{% url 'place_detail' pk=place.pk %}" class="button back-button"><span class="glyphicon glyphicon-chevron-left"></span></a>
     <h2>Place's details</h2>
+    <a href="{% url 'delete_place' pk=place.pk  %}" class="button delete-button"><span class="glyphicon glyphicon-minus"></span></a>
 </div>
     <form method="POST" class="post-form">{% csrf_token %}
         <table id="place-edit-table" class="table">
@@ -31,7 +32,8 @@
                 <td colspan="2">{{ form.location }}</td>
             </tr>
             <tr>
-                <td colspan="2"><button type="submit" class="save btn btn-default">Save</button></td>
+                <td><button type="submit" class="save btn btn-default">Save</button></td>
+                <td><button type="submit" class="save btn btn-default"><a href="{% url 'delete_place' pk=place.pk  %}">Delete</a></button></td>
             </tr>
         </table>
     </form>

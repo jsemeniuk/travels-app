@@ -1,16 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'confirm_delete.html' %}
 {% load static %}
 
-{% block content %}
-<div class="header">
-    <h2>Delete</h2>
-</div>
-<form method="POST" class="post-form">
-    {% csrf_token %}
-    <p>Are you sure that you want to delete <strong>{{elem_to_delete.name}}</strong>?</p>
-    <div>
-        <button type="submit" class="save btn btn-default">Yes, Delete</button>
-        <a href="{% url 'list_edit' pk %}">Cancel</a>
-    </div>
-</form> 
-{% endblock %}
+{% block back_link %}<a href="{% url 'list_edit' pk %}">Cancel</a>{% endblock %}

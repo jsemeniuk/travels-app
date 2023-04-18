@@ -90,6 +90,15 @@ def add_tag(request, **kwargs):
         form = TagForm()
     return render(request, 'my_travels/tag.html', {'form': form})
 
+@login_required
+def delete_place(request, pk):
+    place = get_object_or_404(Places, pk=pk)
+    if request.method == 'GET':
+        return render(request, 'my_travels/confirm_delete.html', {'elem_to_delete': place, 'pk': pk})
+    elif request.method == "POST": 
+        place.delete()
+        return redirect("/", pk=pk)
+
 class TravelsMapView(TemplateView):
 
     template_name = "my_travels/map.html"
