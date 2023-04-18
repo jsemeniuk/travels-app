@@ -12,7 +12,7 @@
         <p id="description">{{ place.description|linebreaksbr }}</p>
         {% if tags %}
             <p><strong>Tags:</strong></p>
-            <p>{% for tag in tags %}{{ tag.tag }}, {% endfor %}</p>
+            <p>{% for tag in tags %}<a href="{% url 'places_tag' tag_id=tag.pk %}">{{ tag.tag }} </a> {% endfor %}</p>
         {% endif %}
     </div>
 {% endblock %}

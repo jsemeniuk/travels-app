@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path("", views.TravelsMapView.as_view(), name='main_page'),
     path('places', views.SearchResultsList.as_view(), name='places_all'),
+    path('places/<int:tag_id>', views.SearchResultsList.as_view(), name='places_tag'),
     path('<int:pk>/', views.place_detail, name='place_detail'),
     path('<int:pk>/edit/', views.place_edit, name='place_edit'),
     path('new/location=<location>', views.place_new, name='place_new'),

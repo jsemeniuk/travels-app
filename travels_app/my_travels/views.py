@@ -111,13 +111,17 @@ class SearchResultsList(ListView):
     template_name = "my_travels/places_all.html"
 
     def get_queryset(self):
-        query = self.request.GET.get("q")
         places_all = []
-        if query != None:
-            search_tags = [tag.pk for tag in Tag.objects.filter(user=self.request.user).filter(Q(tag__icontains=query))]
-            places = Places.objects.filter(user=self.request.user).filter(Q(name__icontains=query) | Q(tag__in=search_tags)).distinct()
+        if "tag_id" in self.kwargs:
+            places = Places.objects.filter(user=self.request.user).filter(Q(tag__id=self.kwargs["tag_id"]))
         else:
-            places = Places.objects.filter(user=self.request.user)
+            query = self.request.GET.get("q")
+        
+            if query != None:
+                search_tags = [tag.pk for tag in Tag.objects.filter(user=self.request.user).filter(Q(tag__icontains=query))]
+                places = Places.objects.filter(user=self.request.user).filter(Q(name__icontains=query) | Q(tag__in=search_tags)).distinct()
+            else:
+                places = Places.objects.filter(user=self.request.user)
         for place in places:
             if place.group == 'AV':
                 status = 'Visited'
