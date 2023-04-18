@@ -44,7 +44,7 @@ def place_edit(request, pk):
     if request.method == "POST":
         form = EditPlaceForm(request.POST, instance=place)
         if form.is_valid():
-            place = form.save(commit=False)
+            place = form.save()
             place.user = request.user
             place.save()
             return redirect("place_detail", pk=place.pk)
@@ -114,7 +114,8 @@ class SearchResultsList(ListView):
         query = self.request.GET.get("q")
         places_all = []
         if query != None:
-            places = Places.objects.filter(user=self.request.user).filter(Q(name__icontains=query))
+            search_tags = [tag.pk for tag in Tag.objects.filter(user=self.request.user).filter(Q(tag__icontains=query))]
+            places = Places.objects.filter(user=self.request.user).filter(Q(name__icontains=query) | Q(tag__in=search_tags)).distinct()
         else:
             places = Places.objects.filter(user=self.request.user)
         for place in places:
