@@ -6,7 +6,7 @@
     <h2>Places</h2>
 </div>
 <form action="{% url 'places_all' %}" method="get">
-    <table id="id_list_table" class="table">
+    <table id="id_search_field" class="table">
         <tr>
             <td>
                 <input
@@ -27,7 +27,7 @@
 {% if not places %}
     <p>No places found</p>
 {% else %}
-    <table id="id_list_table" class="table">
+    <table id="id_places_table" class="table">
         <tr>
             <th>Name</th>
             <th>Status</th>
