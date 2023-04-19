@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from datetime import datetime
-from my_travels.models import Places
+from my_travels.models import Places, Tag
 from lists.models import Lists, Items
 
 def add_new_user():
@@ -13,9 +13,9 @@ def add_new_user():
 def delete_user(user):
     user.delete()
 
-def add_new_place(user):
+def add_new_place(user, name='Test Place'):
     new_place = Places()
-    new_place.name = 'Test Place'
+    new_place.name = name
     new_place.location = 'POINT(17.00 51.00)'
     new_place.visit_date = '2023-01-01'
     new_place.description = 'Test description'
@@ -35,3 +35,10 @@ def add_item_to_list(new_list, item_name):
     new_item.name = item_name
     new_item.list_id = new_list
     new_item.save()
+
+def add_new_tag(user, tag_name):
+    new_tag = Tag()
+    new_tag.user = user
+    new_tag.tag = tag_name
+    new_tag.save()
+    return new_tag
