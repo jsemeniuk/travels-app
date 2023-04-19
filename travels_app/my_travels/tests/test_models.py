@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 import datetime
 
 
-from my_travels.models import Places
+from my_travels.models import Places, Tag
 
 class PlacesModelsTest(TestCase):
 
@@ -109,3 +109,20 @@ class PlacesModelsTest(TestCase):
         third_place = saved_places[2]
         self.assertEqual(third_place.name, 'Tu też Trójkąt Bermudzki')
         self.assertEqual(third_place.user, first_user)
+
+class TagModelsTest(TestCase):
+
+    def test_add_tag(self):
+        user = User.objects.create_user(username='MysteryPlaces',
+                                        password='MysteryPlaces123')
+
+        new_tag = Tag()
+        new_tag.user = user
+        new_tag.tag = "#VeryMysteriousPlace"
+        new_tag.save()
+
+        saved_tags = Tag.objects.all()
+        self.assertEqual(len(saved_tags), 1)
+
+        first_saved_tag = saved_tags[0]
+        self.assertEqual(first_saved_tag.tag, '#VeryMysteriousPlace')
