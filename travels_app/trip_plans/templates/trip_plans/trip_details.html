@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="header">
+    <a href="{% url 'trips_all' %}" class="button back-button"><span class="glyphicon glyphicon-chevron-left"></span></span></a>
+    <h2>{{ trip.name }}</h2>
+    <a href="{% url 'trip_plan_edit' pk=trip.pk %}" class="button"><span class="glyphicon glyphicon-pencil"></span></span></a>
+</div>
+    <div class="trip">
+        
+    </div>
+{% endblock %}

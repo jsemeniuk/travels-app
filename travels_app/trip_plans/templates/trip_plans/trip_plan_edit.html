@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="header">
+    <a href="{% url 'trip_details' pk=trip.pk %}" class="button back-button"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <h2>Let's Plan Something New!</h2>
+</div>
+<form method="POST" class="post-form">{% csrf_token %}
+    <table id="trip-edit-table" class="table">
+        <tr>
+            <td colspan="2"><strong>Name: </strong> {{ form.name }}</td>
+        </tr>
+        <tr>
+            <td ><strong>Start date: </strong> {{ form.start_date }}</td>
+            <td ><strong>End date: </strong> {{ form.end_date }}</td>
+        </tr>
+        <tr>
+            <td colspan="2"><strong>Description: </strong>{{ form.trip_details }}</td>
+        </tr>
+        <tr>
+            <td colspan="2"><strong>Group: </strong>{{ form.journey_details }}</td>
+        </tr>
+        <tr>
+            <td colspan="2"><a href="">List</a></td>
+        </tr>
+        <tr>
+            <td><button type="submit" class="save btn btn-default">Save</button></td>
+            <td><button class="save btn btn-default"><a href="">Delete</a></button></td>
+        </tr>
+    </table>
+</form>
+{% endblock %}
