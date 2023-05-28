@@ -9,6 +9,7 @@
     <a href="{% url 'trip_plan_edit' pk=trip.pk %}" class="button"><span class="glyphicon glyphicon-pencil"></span></span></a>
 </div>
     <div class="trip">
-        
+        <p id="trip_dates">{{ trip.start_date }} - {{ trip.end_date}}</p>
+        <p id="trip_details">{{ trip.details|linebreaksbr }}</p>
     </div>
 {% endblock %}
