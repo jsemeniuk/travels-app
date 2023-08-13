@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
+{% block map %}
     {% if user.is_authenticated %}
     {{ visited_places|json_script:"visited-places-data" }}
     {{ wishlist|json_script:"wishlist-data" }}
