@@ -3,9 +3,9 @@
 
 {% block content %}
 <div class="header">
-    <a href="{% url 'place_detail' pk=place.pk %}" class="button back-button"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a href="{% url 'place_detail' pk=place.pk %}" class="button back-button"><span class="bi bi-chevron-compact-left"></span></a>
     <h2>Place's details</h2>
-    <a href="{% url 'delete_place' pk=place.pk  %}" class="button delete-button"><span class="glyphicon glyphicon-minus"></span></a>
+    <a href="{% url 'delete_place' pk=place.pk  %}" class="button delete-button"><span class="bi bi-trash"></span></a>
 </div>
     <form method="POST" class="post-form">{% csrf_token %}
         <table id="place-edit-table" class="table">
@@ -23,7 +23,7 @@
             </tr>
             <tr>
                 <td><strong>Tags: </strong>{{ form.tag }}</td>
-                <td><a href="{% url 'add_tag' pk=place.pk%}" class="button back-button"><span class="glyphicon glyphicon-plus"></span></a></td>
+                <td><a href="{% url 'add_tag' pk=place.pk%}" class="button back-button"><span class="bi bi-plus-lg"></span></a></td>
             </tr>
             <tr>
                 <td colspan="2"><a href="{% url 'place_check_list_exists' pk=place.pk %}">Lists</a></td>

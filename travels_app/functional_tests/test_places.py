@@ -50,7 +50,7 @@ class AddEditPlaceTest(FunctionalTest):
 
         self.browser.get(f'http://localhost:8000/{place_id}/')
 
-        edit_button = self.browser.find_element_by_css_selector('.glyphicon-pencil')
+        edit_button = self.browser.find_element_by_css_selector('.bi-pencil')
         edit_button.click()
 
         new_name = ''.join(random.choices(string.ascii_uppercase, k=10))
@@ -79,10 +79,10 @@ class AddEditPlaceTest(FunctionalTest):
 
         self.browser.get(f'http://localhost:8000/{place_id}/')
 
-        edit_button = self.browser.find_element_by_css_selector('.glyphicon-pencil')
+        edit_button = self.browser.find_element_by_css_selector('.bi-pencil')
         edit_button.click()
 
-        delete_button = self.browser.find_element_by_css_selector('.glyphicon-minus')
+        delete_button = self.browser.find_element_by_css_selector('.bi-trash')
         delete_button.click()
 
         delete_confirmation_button = self.browser.find_element_by_css_selector('.save')
@@ -103,17 +103,17 @@ class AddEditPlaceTest(FunctionalTest):
 
         self.browser.get(f'http://localhost:8000/{place_id}/')
 
-        edit_button = self.browser.find_element_by_css_selector('.glyphicon-pencil')
+        edit_button = self.browser.find_element_by_css_selector('.bi-pencil')
         edit_button.click()
 
-        add_tag_button = self.browser.find_element_by_css_selector('.glyphicon-plus')
+        add_tag_button = self.browser.find_element_by_css_selector('.bi-plus-lg')
         add_tag_button.click()
 
         tag_name = ''.join(random.choices(string.ascii_uppercase, k=10))
         tag = self.browser.find_element_by_id('id_tag')
         tag.send_keys(tag_name)
 
-        save_tag_button = self.browser.find_element_by_css_selector('.glyphicon-ok')
+        save_tag_button = self.browser.find_element_by_css_selector('.bi-check')
         save_tag_button.click()
 
         tags_list_values = self.browser.find_elements_by_css_selector('#id_tag option')

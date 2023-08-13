@@ -4,9 +4,9 @@
 
 {% block content %}
 <div class="header">
-    <a href="{% url 'main_page' %}" class="button back-button"><span class="glyphicon glyphicon-chevron-left"></span></span></a>
+    <a href="{% url 'main_page' %}" class="button back-button"><span class="bi bi-chevron-compact-left"></span></a>
     <h2>{{ place.name }}</h2>
-    <a href="{% url 'place_edit' pk=place.pk %}" class="button"><span class="glyphicon glyphicon-pencil"></span></span></a>
+    <a href="{% url 'place_edit' pk=place.pk %}" class="button"><span class="bi bi-pencil"></span></a>
 </div>
     <div class="place">
         <p id="description">{{ place.description|linebreaksbr }}</p>

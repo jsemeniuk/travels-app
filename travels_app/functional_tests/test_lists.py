@@ -45,7 +45,7 @@ class AddEditListsTest(FunctionalTest):
         lists_link = self.browser.find_element_by_css_selector('a[href*=lists]')
         lists_link.click()
 
-        add_list_button = self.browser.find_element_by_css_selector('.glyphicon-plus')
+        add_list_button = self.browser.find_element_by_css_selector('.-plus')
         add_list_button.click()
 
         self.add_list('New list test')
@@ -57,7 +57,7 @@ class AddEditListsTest(FunctionalTest):
 
         self.log_in(self.username, self.password)
         self.browser.get(f'http://localhost:8000/{place_id}')
-        edit_button = self.browser.find_element_by_css_selector('.glyphicon-pencil')
+        edit_button = self.browser.find_element_by_css_selector('.bi-pencil')
         edit_button.click()
 
         add_list_button = self.browser.find_element_by_css_selector("[href*='list/']")
@@ -103,7 +103,7 @@ class AddEditListsTest(FunctionalTest):
         self.log_in(self.username, self.password)
         self.browser.get(f'http://localhost:8000/list/{new_list_id}')
 
-        first_item_edit_button = self.browser.find_element_by_css_selector('#id_list_table tr:first-child .glyphicon-pencil')
+        first_item_edit_button = self.browser.find_element_by_css_selector('#id_list_table tr:first-child .bi-pencil')
         first_item_edit_button.click()
         first_item_name_edit = self.browser.find_element_by_css_selector('#id_list_table tr:first-child #id_name')
         first_item_name_edit.clear()
@@ -113,7 +113,7 @@ class AddEditListsTest(FunctionalTest):
         new_first_item_name = self.browser.find_element_by_css_selector('#id_list_table tr:nth-child(2) text')
         self.assertEqual(new_first_item_name.text, 'New name for first item')
 
-        second_item_edit_button = self.browser.find_element_by_css_selector('#id_list_table tr:first-child .glyphicon-pencil')
+        second_item_edit_button = self.browser.find_element_by_css_selector('#id_list_table tr:first-child .bi-pencil')
         second_item_edit_button.click()
         second_item_checkbox_edit = self.browser.find_element_by_css_selector('#id_list_table tr:first-child #id_item_done')
         second_item_checkbox_edit.click()
@@ -132,7 +132,7 @@ class AddEditListsTest(FunctionalTest):
         self.log_in(self.username, self.password)
         self.browser.get(f'http://localhost:8000/list/{new_list_id}')
 
-        delete_item_button = self.browser.find_element_by_css_selector("#id_list_table tr:first-child .glyphicon-minus")
+        delete_item_button = self.browser.find_element_by_css_selector("#id_list_table tr:first-child .bi-trash")
         delete_item_button.click()
 
         delete_confirmation_button = self.browser.find_element_by_css_selector('.save')

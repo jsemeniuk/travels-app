@@ -3,10 +3,10 @@
 
 {% block content %}
 <div class="header">
-    <a href="{% url 'lists_all' %}" class="button back-button"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a href="{% url 'lists_all' %}" class="button back-button"><span class="bi bi-chevron-compact-left"></span></a>
     <h2>{{ list.name }}</h2>
-    <a href="{% url 'edit_list_name' pk=list.pk %}" class="button edit-button"><span class="glyphicon glyphicon-pencil"></span></a>
-    <a href="{% url 'delete_list' pk=list.pk  %}" class="button delete-button"><span class="glyphicon glyphicon-minus"></span></a>
+    <a href="{% url 'edit_list_name' pk=list.pk %}" class="button edit-button"><span class="bi bi-pencil"></span></a>
+    <a href="{% url 'delete_list' pk=list.pk  %}" class="button delete-button"><span class="bi bi-trash"></span></a>
 </div>
 <div class="list">
     <table id="id_list_table" class="table">
@@ -16,14 +16,14 @@
                 <form method="POST" class="post-form">
                     <td>{{ form_edit.item_done }} {{ form_edit.name}}</td>
                     {% csrf_token %}
-                    <td><button type="submit" name="edit-button" class="button save-button"><span class="glyphicon glyphicon-ok"></span></button></td>
+                    <td><button type="submit" name="edit-button" class="button save-button"><span class="bi bi-check"></span></button></td>
                 </form>  
             </tr>
             {% else %}
             <tr>
                 <td><input type="checkbox" name="item" id="item_{{ forloop.counter }}" onclick="return false;"  {% if item.item_done %}checked{% endif %}><text>{{ item.name }}</text></td>
-                <td><a href="{% url 'list_edit_item' pk=list.pk  item_to_edit=item.pk %}" class="button edit-button"><span class="glyphicon glyphicon-pencil"></span></a></td>
-                <td><a href="{% url 'delete_item' pk=item.pk  %}" class="button delete-button"><span class="glyphicon glyphicon-minus"></span></a></td>
+                <td><a href="{% url 'list_edit_item' pk=list.pk  item_to_edit=item.pk %}" class="button edit-button"><span class="bi bi-pencil"></span></a></td>
+                <td><a href="{% url 'delete_item' pk=item.pk  %}" class="button delete-button"><span class="bi bi-trash"></span></a></td>
             </tr>
             {% endif %}
         {% endfor %}
@@ -31,7 +31,7 @@
             <form method="POST" class="post-form">
                 <td>{{ form.item_done}} {{ form.name}}</td>
                 {% csrf_token %}
-                <td><button type="submit" name="save-button" class="button save-button"><span class="glyphicon glyphicon-ok"></span></button></td>
+                <td><button type="submit" name="save-button" class="button save-button"><span class="bi bi-check"></span></button></td>
             </form>  
         </tr>
     </table>
