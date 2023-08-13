@@ -4,6 +4,11 @@ body {
 
 }
 
+.main {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
 #map {
     width: 100%;
     height: 100%;
@@ -11,6 +16,8 @@ body {
 }
 
 .header {
+    margin-top: 20px;
+    margin-bottom: 20px;
     display: flex;
 }
 
@@ -20,23 +27,9 @@ body {
 }
 
 .page-header{
-    background-color: #ff00d2;
+    background-color: #FF66C4;
     margin: 0 0 0 0;
     padding: 1px 0px 0px 55px;
-}
-
-.top-menu {
-    color: #ffffff;
-    float: right;
-    font-size: 15pt;
-    margin-right: 30px;
-    margin-top: -75px;
-}
-
-.top-menu a {
-    font-family: 'Lobster';
-    color: #ffffff;
-    font-size: 18pt;
 }
 
 h1, h1 a {
@@ -48,19 +41,13 @@ h1, h1 a {
 
 h2 {
     font-family: 'Lobster', cursive;
-    color: #ff00d2;
+    color: #FF66C4;
     padding-left: 20px;
 }
 
 h3 {
     font-family: 'Lobster', cursive;
-    color: #ff00d2;
-}
-
-form {
-    margin-top: 50px;
-    margin-left: 30px;
-    margin-right: 30px;
+    color: #FF66C4;
 }
 
 #description {
@@ -76,26 +63,12 @@ form {
     float: left;
 }
 
-.place, .list{
-    margin-left: 30px;
-    margin-right: 30px;
-}
-
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #faf6f6;
-  }
-  
-  li {
-    float: right;
-  }
-  
-  li a {
-    display: block;
-    padding: 8px;
   }
 
   .save-button, .clear-button {
@@ -115,3 +88,20 @@ ul {
   #place-edit-table td:first-child{
     width: 150px
   }
+
+.btn-header{
+    background-color: #FF66C4;
+    border-color: #FF66C4;
+    height: 70px;
+    width: 70px;
+}
+
+.btn-header:hover, .btn-header.show, .btn-header:active, .btn-header.active{
+    background-color: #FF66C4;
+    border-color: #FF66C4;
+}
+
+.dropdown-icon {
+    color: #ffffff;
+}
+
