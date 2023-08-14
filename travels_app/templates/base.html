@@ -15,8 +15,7 @@
     {{ form.media }}
 </head>
 <body> 
-    <div class="page-header">
-        <div class="container-fluid">
+    <div class="container-fluid page-header">
         <div class="row">
           <div class="col text-start">
             <a href="{% url 'main_page' %}"><img src="/static/images/whitelogo_ang_small.png" alt="Travel Journal"></a>
@@ -28,6 +27,7 @@
                 </button>
                 <ul class="dropdown-menu">
                     {% if user.is_authenticated %}
+                        <li><a class="dropdown-item" href="{% url 'main_page' %}">Map</a></li>
                         <li><a class="dropdown-item" href="{% url 'places_all' %}">Places</a></li>
                         <li><a class="dropdown-item" href="{% url 'lists_all' %}">Lists</a></li>
                         <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
@@ -37,8 +37,7 @@
                 </ul>
             </div>
           </div>
-        </div>
-    </div>
+        </div>    
     </div>
     <div class="main">
         {% block content %}
