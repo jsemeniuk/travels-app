@@ -17,11 +17,7 @@ body {
 
 .header {
     margin-top: 20px;
-    margin-bottom: 20px;
-    display: flex;
-}
-
-.header a, .header h2 {
+    margin-bottom: 10px;
     display: flex;
 }
 
@@ -32,12 +28,23 @@ body {
     height: 8%;
 }
 
+.btn-header, .btn-header:hover, .btn-header.show, .btn-header:active, .btn-header.active{
+    background-color: none;
+    border-color: none;
+    height: 70px;
+    width: 70px;
+}
+
+.dropdown-icon {
+    color: #ffffff;
+}
+
 h2, h3 {
     font-family: 'Lobster', cursive;
     color: #FF66C4;
 }
 
-#description {
+.details {
     padding-left: 20px;
 }
 
@@ -50,9 +57,9 @@ h2, h3 {
     float: left;
 }
 
-  .save-button, .clear-button {
+.save-button, .clear-button {
     padding: 0;
-  }
+}
 
   #id_new_list_table td:nth-child(3){
     width: 70%
@@ -66,19 +73,13 @@ h2, h3 {
     width: 150px
   }
 
-.btn-header, .btn-header:hover, .btn-header.show, .btn-header:active, .btn-header.active{
-    background-color: none;
-    border-color: none;
-    height: 70px;
-    width: 70px;
-}
 
-.dropdown-icon {
-    color: #ffffff;
-}
 
 button a {
     color: #ffffff;
     text-decoration: none;
 }
 
+p a {
+    text-decoration: none;
+}
