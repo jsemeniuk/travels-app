@@ -8,6 +8,8 @@ class ManageItems(forms.ModelForm):
         fields = ("item_done", "name",)
 
 class ManageLists(forms.ModelForm):
+    name = forms.CharField(
+        widget=forms.TextInput(attrs={"class": "form-control"}))
     class Meta:
         model = Lists
         fields = ("name",)
