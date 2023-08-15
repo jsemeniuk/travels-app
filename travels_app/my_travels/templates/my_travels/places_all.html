@@ -2,10 +2,11 @@
 {% load static %}
 
 {% block content %}
-<div class="main">
-    <div class="header">
-        <h2>Places</h2>
-    </div>
+<div class="col gy-4 mb-5">
+    <div class="details">
+        <div class="header">
+            <h2>Places</h2>
+        </div>
     <form action="{% url 'places_all' %}" method="get" class="row g-2">
         <div class="col-8">
             <label for="search_field" class="visually-hidden">Search</label>
@@ -35,6 +36,7 @@
             {% endfor %}
         </div>
     </div>
+</div>
 </div>
 {% endif %}
 {% endblock %}
