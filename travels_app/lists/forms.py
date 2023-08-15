@@ -2,7 +2,9 @@ from django import forms
 from .models import Items, Lists
 
 class ManageItems(forms.ModelForm):
-    item_done = forms.BooleanField(required=False)
+    item_done = forms.BooleanField(
+        required=False,
+        widget= forms.CheckboxInput(attrs={"class": "form-check-input"}))
     class Meta:
         model = Items
         fields = ("item_done", "name",)
