@@ -1,5 +1,5 @@
 import json
-
+from random import choice
 from django.core.serializers import serialize
 from django.views.generic.base import TemplateView
 from django.views.generic.list import  ListView
@@ -31,12 +31,14 @@ def handler500(request, *args, **argv):
 
 @login_required
 def place_detail(request, pk):
+    places_all = Places.objects.filter(user=request.user)
     place = get_object_or_404(Places, pk=pk)
     tags = place.tag.all()
+    suggestions = [choice(places_all) for i in range(3)]
     if len(tags) > 0:
-        return render(request, 'my_travels/place_details.html', {'place': place, 'tags': tags})
+        return render(request, 'my_travels/place_details.html', {'place': place, 'tags': tags, "suggestions" : suggestions})
     else:
-        return render(request, 'my_travels/place_details.html', {'place': place})
+        return render(request, 'my_travels/place_details.html', {'place': place, "suggestions" : suggestions})
 
 @login_required
 def place_edit(request, pk):
