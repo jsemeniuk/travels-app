@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.gis.db import models
 from django.db import models as dbmodels
+from ckeditor.fields import RichTextField
 
 User= settings.AUTH_USER_MODEL
 
@@ -15,7 +16,7 @@ class Places(models.Model):
     name = models.CharField(max_length=100)
     location = models.PointField()
     visit_date = models.DateField(blank=True)
-    description = models.TextField(blank=True)
+    description = RichTextField(blank=True)
     photo = models.FileField(upload_to='travel_photos', blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     VISTITED = 'AV'

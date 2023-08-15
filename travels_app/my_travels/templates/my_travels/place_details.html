@@ -8,15 +8,15 @@
         <div class="header">
             <h2>{{ place.name }}</h2>
             <a href="{% url 'place_edit' pk=place.pk %}" class="button d-flex align-items-center"><span class="bi bi-pencil"></span></a>
+            <a href="{% url 'delete_place' pk=place.pk  %}" class="button delete-button d-flex align-items-center"><span class="bi bi-trash"></span></a>
         </div>
         <div class="mb-2">
             {% if tags %}
-            {% for tag in tags %}<button type="button" class="btn btn-primary m-1"
-                href="{% url 'places_tag' tag_id=tag.pk %}">{{ tag.tag }}</button>{% endfor %}
+            {% for tag in tags %}
+            <a href="{% url 'places_tag' tag_id=tag.pk %}" class="btn btn-primary">{{ tag.tag }}</a> {% endfor %}
             {% endif %}
         </div>
-        <img src="/static/images/pinklogo_ang.png" class="img-fluid" alt="Photo for place">
-        <div>{{ place.description|linebreaksbr }}</div>
+        <div>{{ place.description|safe }}</div>
 
     </div>
 </div>

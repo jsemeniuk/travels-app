@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     "rest_framework",
     "rest_framework_gis",
+    "ckeditor",
     'my_travels',
     'lists',
 ]
@@ -73,6 +74,13 @@ TEMPLATES = [
         },
     },
 ]
+
+CKEDITOR_CONFIGS = {
+    'default': { 
+        'width': 'auto',
+        'toolbarCanCollapse': True,
+    },
+}
 
 WSGI_APPLICATION = 'travels_app.wsgi.application'
 

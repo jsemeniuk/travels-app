@@ -41,16 +41,25 @@ def place_detail(request, pk):
 @login_required
 def place_edit(request, pk):
     place = get_object_or_404(Places, pk=pk)
+    if place.group == 'AV':
+        group_elem = True
+    else:
+        group_elem = False
     if request.method == "POST":
         form = EditPlaceForm(request.POST, instance=place)
         if form.is_valid():
             place = form.save()
             place.user = request.user
+            if request.POST.get('group_check') == 'on':
+                place.group = 'AV'
+            else:
+                place.group = 'WI'
+            
             place.save()
             return redirect("place_detail", pk=place.pk)
     else:
         form = EditPlaceForm(instance=place)
-    return render(request, 'my_travels/place_edit.html', {'form': form, 'place': place})
+    return render(request, 'my_travels/place_edit.html', {'form': form, 'place': place, 'group_elem': group_elem})
 
 @login_required
 def place_new(request, **kwargs):

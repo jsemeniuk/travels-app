@@ -20,11 +20,15 @@ class NewPlaceForm(PlaceForm):
         fields = ("name", "visit_date")
 
 class EditPlaceForm(PlaceForm):
-    location = forms.PointField(widget=
-        forms.OSMWidget(attrs={'map_height': 500}))
+    location = forms.PointField(widget=forms.TextInput(attrs={'type': "hidden"}))
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["tag"].widget.attrs.update({"class": "form-select"})
+
+
     class Meta:
         model = Places
-        fields = ("name", "visit_date", "description", "group", "tag", "location")
+        fields = ("name", "visit_date", "description", "location", "tag")
 
 
 class TagForm(forms.ModelForm):

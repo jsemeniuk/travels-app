@@ -83,3 +83,7 @@ button a {
 p a {
     text-decoration: none;
 }
+
+.date_field, .select_field {
+    min-width: 150px;
+}
