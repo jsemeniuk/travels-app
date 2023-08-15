@@ -5,7 +5,7 @@ from datetime import datetime
 from django.contrib.admin import widgets 
 
 class PlaceForm(forms.ModelForm):
-    name =forms.CharField(
+    name = forms.CharField(
         label='Place\'s name',
         widget=forms.TextInput(attrs={"class": "form-control"})
         )
@@ -32,6 +32,9 @@ class EditPlaceForm(PlaceForm):
 
 
 class TagForm(forms.ModelForm):
+    tag = forms.CharField(
+        widget=forms.TextInput(attrs={"class": "form-control"})
+        )
     class Meta:
         model = Tag
         fields = ("tag", )
