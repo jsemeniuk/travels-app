@@ -48,31 +48,10 @@ h2, h3 {
     padding-left: 20px;
 }
 
-.post-form textarea, .post-form input {
-    width: 100%;
-}
-
 .button {
     margin-left: 30px;
     float: left;
 }
-
-.save-button, .clear-button {
-    padding: 0;
-}
-
-  #id_new_list_table td:nth-child(3){
-    width: 70%
-  }
-
-  #id_new_list_table  #id_name, #id_list_table #id_name{
-    width: 80%
-  }
-
-  #place-edit-table td:first-child{
-    width: 150px
-  }
-
 
 
 button a {
@@ -86,4 +65,14 @@ p a {
 
 .date_field, .select_field {
     min-width: 150px;
+}
+
+.icon-button, .icon-button:hover {
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+
+.icon-button span {
+    color: #0d6efd;
+    font-size: large;
 }
