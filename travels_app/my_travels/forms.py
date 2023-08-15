@@ -5,17 +5,19 @@ from datetime import datetime
 from django.contrib.admin import widgets 
 
 class PlaceForm(forms.ModelForm):
+    name =forms.CharField(
+        label='Place\'s name',
+        widget=forms.TextInput(attrs={"class": "form-control"})
+        )
     visit_date = forms.DateField(
-            label='Date',
-            widget=widgets.AdminDateWidget(format='%d.%m.%Y'),
-            input_formats=['%d.%m.%Y'],
-            initial=datetime.today()
+            label='Visit\'s date',
+            widget=widgets.AdminDateWidget(attrs={"class": "form-control", "type": "date", "value": datetime.today() }),
             )
 
 class NewPlaceForm(PlaceForm):
     class Meta:
         model = Places
-        fields = ("name", "visit_date", "description", "group", 'tag')
+        fields = ("name", "visit_date")
 
 class EditPlaceForm(PlaceForm):
     location = forms.PointField(widget=

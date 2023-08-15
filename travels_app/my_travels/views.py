@@ -62,6 +62,10 @@ def place_new(request, **kwargs):
             place = form.save(commit=False)
             place.user = request.user
             place.location = f'POINT({lng} {lat})' 
+            if request.POST.get('group_check') == 'on':
+                place.group = 'AV'
+            else:
+                place.group = 'WI'
             place.save()
             return redirect("place_detail", pk=place.pk)
     else:
