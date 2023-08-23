@@ -1,10 +1,11 @@
 from django.urls import path
+from django.contrib.auth.decorators import login_required
 
 from . import views
 
 urlpatterns = [
-    path("", views.TravelsMapView.as_view(), name='main_page'),
-    path('places', views.SearchResultsList.as_view(), name='places_all'),
+    path("", login_required(views.TravelsMapView.as_view(), login_url="login"), name='main_page'),
+    path('places', login_required(views.SearchResultsList.as_view(), login_url="login"), name='places_all'),
     path('places/<int:tag_id>', views.SearchResultsList.as_view(), name='places_tag'),
     path('<int:pk>/', views.place_detail, name='place_detail'),
     path('<int:pk>/edit/', views.place_edit, name='place_edit'),

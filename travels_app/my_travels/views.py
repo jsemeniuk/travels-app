@@ -29,7 +29,7 @@ def handler500(request, *args, **argv):
     return error_page(request, 500)
 
 
-@login_required
+@login_required(login_url='login')
 def place_detail(request, pk):
     places_all = Places.objects.filter(user=request.user)
     place = get_object_or_404(Places, pk=pk)
@@ -40,7 +40,7 @@ def place_detail(request, pk):
     else:
         return render(request, 'my_travels/place_details.html', {'place': place, "suggestions" : suggestions})
 
-@login_required
+@login_required(login_url='login')
 def place_edit(request, pk):
     place = get_object_or_404(Places, pk=pk)
     if place.group == 'AV':
@@ -63,7 +63,7 @@ def place_edit(request, pk):
         form = EditPlaceForm(instance=place)
     return render(request, 'my_travels/place_edit.html', {'form': form, 'place': place, 'group_elem': group_elem})
 
-@login_required
+@login_required(login_url='login')
 def place_new(request, **kwargs):
     lat = kwargs['location'].split(',')[0]
     lng = kwargs['location'].split(',')[1]
@@ -83,7 +83,7 @@ def place_new(request, **kwargs):
         form = NewPlaceForm()
     return render(request, 'my_travels/place_add.html', {'form': form})
     
-@login_required
+@login_required(login_url='login')
 def place_check_list_exists(request, pk):
     place = get_object_or_404(Places, pk=pk)
     try:
@@ -92,7 +92,7 @@ def place_check_list_exists(request, pk):
     except ObjectDoesNotExist:
         return redirect("list_place_new", place_id=pk)      
 
-
+@login_required(login_url='login')
 def add_tag(request, **kwargs):
     if request.method == "POST":
         form = TagForm(request.POST)
@@ -105,7 +105,7 @@ def add_tag(request, **kwargs):
         form = TagForm()
     return render(request, 'my_travels/tag.html', {'form': form})
 
-@login_required
+@login_required(login_url='login')
 def delete_place(request, pk):
     place = get_object_or_404(Places, pk=pk)
     if request.method == 'GET':
@@ -128,6 +128,7 @@ class TravelsMapView(TemplateView):
         context["visited_places"] = json.loads(serialize("geojson", Places.objects.all()))
         context["wishlist"] = json.loads(serialize("geojson", Places.objects.all()))
         return context 
+
 
 class SearchResultsList(ListView):
     model = Places

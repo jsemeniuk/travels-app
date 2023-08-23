@@ -7,7 +7,5 @@
     {{ wishlist|json_script:"wishlist-data" }}
     <div id="map"></div>
     <script src="{% static 'js/map.js' %}"></script>
-    {% else %}
-    <h2>You're not authorised to view this page. Click <a href="{% url 'login' %}">here</a> to log in</h2>
     {% endif %}           
 {% endblock %}
