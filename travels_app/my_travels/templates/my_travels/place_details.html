@@ -16,7 +16,7 @@
             <a href="{% url 'places_tag' tag_id=tag.pk %}" class="btn btn-primary">{{ tag.tag }}</a> {% endfor %}
             {% endif %}
         </div>
-        <div>{{ place.description|safe }}</div>
+        <div id="description">{{ place.description|safe }}</div>
 
     </div>
 </div>
