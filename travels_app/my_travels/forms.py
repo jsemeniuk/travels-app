@@ -5,27 +5,36 @@ from datetime import datetime
 from django.contrib.admin import widgets 
 
 class PlaceForm(forms.ModelForm):
+    name = forms.CharField(
+        label='Place\'s name',
+        widget=forms.TextInput(attrs={"class": "form-control"})
+        )
     visit_date = forms.DateField(
-            label='Date',
-            widget=widgets.AdminDateWidget(format='%d.%m.%Y'),
-            input_formats=['%d.%m.%Y'],
-            initial=datetime.today()
+            label='Visit\'s date',
+            widget=widgets.AdminDateWidget(attrs={"class": "form-control", "type": "date", "value": datetime.today() }),
             )
 
 class NewPlaceForm(PlaceForm):
     class Meta:
         model = Places
-        fields = ("name", "visit_date", "description", "group", 'tag')
+        fields = ("name", "visit_date")
 
 class EditPlaceForm(PlaceForm):
-    location = forms.PointField(widget=
-        forms.OSMWidget(attrs={'map_height': 500}))
+    location = forms.PointField(widget=forms.TextInput(attrs={'type': "hidden"}))
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["tag"].widget.attrs.update({"class": "form-select"})
+
+
     class Meta:
         model = Places
-        fields = ("name", "visit_date", "description", "group", "tag", "location")
+        fields = ("name", "visit_date", "description", "location", "tag")
 
 
 class TagForm(forms.ModelForm):
+    tag = forms.CharField(
+        widget=forms.TextInput(attrs={"class": "form-control"})
+        )
     class Meta:
         model = Tag
         fields = ("tag", )

@@ -6,69 +6,41 @@ body {
 
 #map {
     width: 100%;
-    height: 100%;
+    height: 92%;
     vertical-align: middle;
 }
 
 .header {
+    margin-top: 20px;
+    margin-bottom: 10px;
     display: flex;
-}
-
-.header a, .header h2 {
-    display: flex;
-    align-items: center;
 }
 
 .page-header{
-    background-color: #ff00d2;
+    background-color: #FF66C4;
     margin: 0 0 0 0;
-    padding: 1px 0px 0px 55px;
+    min-height: 70px;
+    height: 8%;
 }
 
-.top-menu {
+.btn-header, .btn-header:hover, .btn-header.show, .btn-header:active, .btn-header.active{
+    background-color: none;
+    border-color: none;
+    height: 70px;
+    width: 70px;
+}
+
+.dropdown-icon {
     color: #ffffff;
-    float: right;
-    font-size: 15pt;
-    margin-right: 30px;
-    margin-top: -75px;
 }
 
-.top-menu a {
-    font-family: 'Lobster';
-    color: #ffffff;
-    font-size: 18pt;
-}
-
-h1, h1 a {
+h2, h3 {
     font-family: 'Lobster', cursive;
-    color: #ffffff;
-    font-size: 20pt;
-    vertical-align: middle;
+    color: #FF66C4;
 }
 
-h2 {
-    font-family: 'Lobster', cursive;
-    color: #ff00d2;
+.details {
     padding-left: 20px;
-}
-
-h3 {
-    font-family: 'Lobster', cursive;
-    color: #ff00d2;
-}
-
-form {
-    margin-top: 50px;
-    margin-left: 30px;
-    margin-right: 30px;
-}
-
-#description {
-    padding-left: 20px;
-}
-
-.post-form textarea, .post-form input {
-    width: 100%;
 }
 
 .button {
@@ -76,42 +48,26 @@ form {
     float: left;
 }
 
-.place, .list, .trip{
-    margin-left: 30px;
-    margin-right: 30px;
+
+button a {
+    color: #ffffff;
+    text-decoration: none;
 }
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #faf6f6;
-  }
-  
-  li {
-    float: right;
-  }
-  
-  li a {
-    display: block;
-    padding: 8px;
-  }
+p a {
+    text-decoration: none;
+}
 
-  .save-button, .clear-button {
-    padding: 0;
-    border: none;
-    background: none;
-  }
+.date_field, .select_field {
+    min-width: 150px;
+}
 
-  #id_new_list_table td:nth-child(3){
-    width: 70%
-  }
+.icon-button, .icon-button:hover {
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
 
-  #id_new_list_table  #id_name, #id_list_table #id_name{
-    width: 80%
-  }
-
-  #place-edit-table td:first-child{
-    width: 150px
-  }
+.icon-button span {
+    color: #0d6efd;
+    font-size: large;
+}

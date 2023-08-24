@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 
-@login_required
+@login_required(login_url='login')
 def add_list(request, **kwargs):
     if request.method == "POST":
         form = ManageLists(request.POST)
@@ -21,7 +21,7 @@ def add_list(request, **kwargs):
         form = ManageLists()
     return render(request, 'lists/list_new.html', {'form': form})
 
-@login_required
+@login_required(login_url='login')
 def add_items(request, pk, **kwargs):
     list_to_edit = get_object_or_404(Lists, pk=pk)
     list_items = Items.objects.filter(list_id=list_to_edit)
@@ -56,14 +56,14 @@ def add_items(request, pk, **kwargs):
         form = ManageItems()
     return render(request, 'lists/list_edit.html', {'list': list_to_edit, 'form': form, 'items': list_items})
 
-@login_required
+@login_required(login_url='login')
 def lists_all(request):
     lists_all = Lists.objects.filter(user=request.user)
     if len(lists_all) == 0:
         lists_all = False
     return render(request, 'lists/lists_all.html', {'lists': lists_all})
 
-@login_required
+@login_required(login_url='login')
 def delete_item(request, pk):
     item = get_object_or_404(Items, pk=pk)
     list_pk = item.list_id.pk
@@ -73,7 +73,7 @@ def delete_item(request, pk):
         item.delete()
         return redirect("list_edit", pk=list_pk)
 
-@login_required
+@login_required(login_url='login')
 def delete_list(request, pk):
     list_to_edit = get_object_or_404(Lists, pk=pk)
     if request.method == 'GET':
@@ -81,7 +81,8 @@ def delete_list(request, pk):
     elif request.method == "POST": 
         list_to_edit.delete()
         return redirect("lists_all")
-
+        
+@login_required(login_url='login')
 def edit_list_name(request, pk):
     list_to_edit = get_object_or_404(Lists, pk=pk)
     if request.method == "POST":

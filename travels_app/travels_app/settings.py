@@ -76,6 +76,13 @@ TEMPLATES = [
     },
 ]
 
+CKEDITOR_CONFIGS = {
+    'default': { 
+        'width': 'auto',
+        'toolbarCanCollapse': True,
+    },
+}
+
 WSGI_APPLICATION = 'travels_app.wsgi.application'
 
 

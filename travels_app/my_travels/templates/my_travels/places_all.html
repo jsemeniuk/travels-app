@@ -2,45 +2,41 @@
 {% load static %}
 
 {% block content %}
-<div class="header">
-    <h2>Places</h2>
-</div>
-<form action="{% url 'places_all' %}" method="get">
-    <table id="id_search_field" class="table">
-        <tr>
-            <td>
-                <input
-                    type="search"
-                    name="q"
-                    placeholder="Search by name or tag"
-                    class="form-control"
-                />
-            </td>
-            <td>
-                <button class="clear-button"><a href="{% url 'places_all' %}">Clear</a></button>
-            </td>
-        </tr>
-    </table>
-</form>
-</br>
-<div class="list">
-{% if not places %}
+<div class="col gy-4 mb-5">
+    <div class="details">
+        <div class="header">
+            <h2>Places</h2>
+        </div>
+    <form action="{% url 'places_all' %}" method="get" class="row g-2">
+        <div class="col-8">
+            <label for="search_field" class="visually-hidden">Search</label>
+            <input id="search_field" type="search" name="q" placeholder="Search..." class="form-control" />
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3"><a href="{% url 'places_all' %}">Clear</a></button>
+        </div>
+    </form>
+    </br>
+    {% if not places %}
     <p>No places found</p>
-{% else %}
-    <table id="id_places_table" class="table">
-        <tr>
-            <th>Name</th>
-            <th>Status</th>
-            <th>Tags</th>
-        </tr>
-        {% for place in places %}
-          <tr>
-            <td><a href="{% url 'place_detail' pk=place.pk %}">{{ place.name }}</a></td>
-            <td>{{ place.group }}</td>
-            <td>{% for tag in place.tags %}{{ tag }}, {% endfor %}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    {% else %}
+    <div class="container-fluid px-0 text-center">
+        <div class="row g-2 row-cols-auto">
+            {% for place in places %}
+            <div class="col">
+                <div class="card" style="width: 15rem;">
+                    <img src="/static/images/logo.png" class="card-img-top" alt="Photo for place">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ place.name }}</h5>
+                        <p class="card-text"></p>
+                        <a href="{% url 'place_detail' pk=place.pk %}" class="btn btn-primary">View</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 </div>
 {% endif %}
-{% endblock %} 
+{% endblock %}
