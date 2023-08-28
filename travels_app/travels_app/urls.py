@@ -19,7 +19,6 @@ from django.contrib.auth import views
 from django.conf.urls import handler404
 from lists.views import lists_all
 from my_travels.views import SearchResultsList
-from trip_plans.views import trips_all
 
 handler404 = 'my_travels.views.handler404'
 handler400 = 'my_travels.views.handler400'

@@ -2,32 +2,46 @@
 {% load static %}
 
 {% block content %}
-<div class="header">
-    <a href="{% url 'trip_details' pk=trip.pk %}" class="button back-button"><span class="glyphicon glyphicon-chevron-left"></span></a>
-    <h2>Let's Plan Something New!</h2>
+<div class="col-9 gy-4 mb-5">
+    <div class="details">
+        <form method="POST" class="post-form">
+        {% csrf_token %}
+        <div class="header">
+            <h2>{{ form.name }}</h2>
+        </div>
+        
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="id_group_check" name="group_check" {% if group_elem %} checked {% endif %}>
+            <label class="form-check-label" for="group_check">Done</label>
+        </div>
+        
+        <label for="id_trip_dates" class="form-label">Trip dates:</label>
+        <div class="input-group mb-3" id="id_trip_dates">
+            {{ form.start_date }}
+            <span class="input-group-text">-</span>
+            {{ form.end_date }}
+          </div>
+          <div class="col-2 mb-2  select_field">
+            <label for="id_tag" class="form-label">Select from existing tags:</label>
+            {{ form.tag }}
+            <p><span class="bi bi-plus-lg"></span><a href="{% url 'add_tag_for_trip' pk=trip.pk%}">Or add new one</a></p>
+        </div>
+        <div class="mb-2">
+            <label for="id_details" class="form-label">Trip details:</label><br>
+            {{ form.details }}
+        </div>
+        <div class="col-2 mb-2  select_field">
+            <label for="id_places" class="form-label">Add places</label>
+            {{ form.places }}
+            <!--<p><span class="bi bi-plus-lg"></span><a href="">Or add new one</a></p>-->
+        </div>
+        
+        <a href="{% url 'trip_details' pk=trip.pk %}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="save btn btn-primary">Save</button>
+        </form>
+    </div>
 </div>
-<form method="POST" class="post-form">{% csrf_token %}
-    <table id="trip-edit-table" class="table">
-        <tr>
-            <td colspan="2"><strong>Name: </strong> {{ form.name }}</td>
-        </tr>
-        <tr>
-            <td ><strong>Start date: </strong> {{ form.start_date }}</td>
-            <td ><strong>End date: </strong> {{ form.end_date }}</td>
-        </tr>
-        <tr>
-            <td colspan="2"><strong>Trip Details: </strong>{{ form.details }}</td>
-        </tr>
-        <tr>
-            <td colspan="2"><strong>Places to visit: </strong>{{ form.places }}</td>
-        </tr>
-        <tr>
-            <td colspan="2"><a href="">List</a></td>
-        </tr>
-        <tr>
-            <td><button type="submit" class="save btn btn-default">Save</button></td>
-            <td><button class="save btn btn-default"><a href="">Delete</a></button></td>
-        </tr>
-    </table>
-</form>
+
+</div>
+</div>
 {% endblock %}

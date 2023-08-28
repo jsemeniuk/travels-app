@@ -5,19 +5,20 @@ from datetime import datetime, timedelta
 from my_travels.models import Places
 
 class TripPlanForm(forms.ModelForm):
+    name = forms.CharField(
+        label='Title',
+        widget=forms.TextInput(attrs={"class": "form-control"})
+        )
 
     start_date = forms.DateField(
-            label='Start Date',
-            widget=widgets.AdminDateWidget(format='%d.%m.%Y'),
-            input_formats=['%d.%m.%Y'],
-            initial=datetime.today() + timedelta(days=1)
+            label='From',
+            widget=widgets.AdminDateWidget(attrs={"class": "form-control date-field", "type": "date", "value": datetime.today() }),
             )
 
+    #TODO Add validation for end_date to be after start_date
     end_date = forms.DateField(
-            label='End Date',
-            widget=widgets.AdminDateWidget(format='%d.%m.%Y'),
-            input_formats=['%d.%m.%Y'],
-            initial=datetime.today() + timedelta(days=2)
+            label='To',
+            widget=widgets.AdminDateWidget(attrs={"class": "form-control date-field", "type": "date", "value": datetime.today() }),
             )
 
 
@@ -37,4 +38,4 @@ class EditPlanForm(TripPlanForm):
 
     class Meta:
         model = TripPlan
-        fields = ("name", "start_date", "end_date", "details", "places")
+        fields = ("name", "start_date", "end_date", "details", "places", "tag")

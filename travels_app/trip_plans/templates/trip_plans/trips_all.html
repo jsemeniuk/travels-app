@@ -2,20 +2,42 @@
 {% load static %}
 
 {% block content %}
-<div class="header">
-    <h2>All trips</h2>
-    <a href="{% url 'trip_plan_new' %}" class="button back-button"><span class="glyphicon glyphicon-plus"></span></a>
-</div>
-<div class="list">
-{% if not trips %}
+<div class="col gy-4 mb-5">
+    <div class="details">
+        <div class="header">
+            <h2>All trips</h2>
+            <a href="{% url 'trip_plan_new' %}" class="button d-flex align-items-center"><span class="bi bi-plus-lg"></span></a>
+        </div>
+    <form action="{% url 'trips_all' %}" method="get" class="row g-2">
+        <div class="col-8">
+            <label for="search_field" class="visually-hidden">Search</label>
+            <input id="search_field" type="search" name="q" placeholder="Search..." class="form-control" />
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3"><a href="{% url 'trips_all' %}">Clear</a></button>
+        </div>
+    </form>
+    </br>
+    {% if not trips %}
     <p>No trips found</p>
-{% else %}
-
-    <table id="id_list_table" class="table">
-        {% for trip in trips %}
-          <tr><td><a href="{% url 'trip_details' pk=trip.pk %}">{{ trip.name }}</a></td></tr>
-        {% endfor %}
-    </table>
+    {% else %}
+    <div class="container-fluid px-0 text-center">
+        <div class="row g-2 row-cols-auto">
+            {% for trip in trips %}
+            <div class="col">
+                <div class="card" style="width: 15rem;">
+                    <img src="/static/images/logo.png" class="card-img-top" alt="Photo for trip">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ trip.name }}</h5>
+                        <p class="card-text"></p>
+                        <a href="{% url 'trip_details' pk=trip.pk %}" class="btn btn-primary">View</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 </div>
-{% endif %}
+</div>
 {% endblock %}

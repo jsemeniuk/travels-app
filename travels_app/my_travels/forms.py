@@ -11,7 +11,7 @@ class PlaceForm(forms.ModelForm):
         )
     visit_date = forms.DateField(
             label='Visit\'s date',
-            widget=widgets.AdminDateWidget(attrs={"class": "form-control", "type": "date", "value": datetime.today() }),
+            widget=widgets.AdminDateWidget(attrs={"class": "form-control date-field", "type": "date", "value": datetime.today() }),
             )
 
 class NewPlaceForm(PlaceForm):

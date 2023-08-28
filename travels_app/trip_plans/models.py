@@ -1,5 +1,5 @@
 from django.db import models
-from my_travels.models import Places
+from my_travels.models import Places, Tag
 from lists.models import Lists
 from django.conf import settings
 from ckeditor.fields import RichTextField
@@ -14,3 +14,4 @@ class TripPlan(models.Model):
     lists = models.ForeignKey(Lists, on_delete=models.CASCADE, blank=True, null=True)
     places = models.ManyToManyField(Places, blank=True, null=True)
     done = models.BooleanField(default=False)
+    tag = models.ManyToManyField(Tag, blank=True)
