@@ -101,6 +101,7 @@ class SearchResultsList(ListView):
         for trip in trips:
             trips_all.append({'name':trip.name, 
                                'pk': trip.pk, 
+                               'dates': f"{trip.start_date.strftime('%d.%m.%Y')} - {trip.end_date.strftime('%d.%m.%Y')}",
                                'tags': [tag.tag for tag in trip.tag.all()]})
         if len(trips_all) == 0:
             trips_all = False

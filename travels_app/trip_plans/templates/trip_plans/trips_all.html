@@ -29,7 +29,7 @@
                     <img src="/static/images/logo.png" class="card-img-top" alt="Photo for trip">
                     <div class="card-body">
                         <h5 class="card-title">{{ trip.name }}</h5>
-                        <p class="card-text"></p>
+                        <p class="card-text">{{ trip.dates }}</p>
                         <a href="{% url 'trip_details' pk=trip.pk %}" class="btn btn-primary">View</a>
                     </div>
                 </div>
