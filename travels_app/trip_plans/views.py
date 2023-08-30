@@ -95,8 +95,7 @@ class SearchResultsList(ListView):
         
             if query != None:
                 search_tags = [tag.pk for tag in Tag.objects.filter(user=self.request.user).filter(Q(tag__icontains=query))]
-                search_places = [place.pk for place in Places.objects.filter(user=self.request.user).filter(Q(name__icontains=query))]
-                trips = TripPlan.objects.filter(user=self.request.user).filter(Q(name__icontains=query) | Q(tag__in=search_tags) | Q(places__in=search_places)).distinct()
+                trips = TripPlan.objects.filter(user=self.request.user).filter(Q(name__icontains=query) | Q(tag__in=search_tags)).distinct()
             else:
                 trips = TripPlan.objects.filter(user=self.request.user)
         for trip in trips:
