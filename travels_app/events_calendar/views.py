@@ -90,7 +90,7 @@ def event_details(request, pk):
         return render(request, 'events_calendar/event_details.html', {'event': event, 'tags': tags, 'places': places})
     elif len(tags) > 0:
         return render(request, 'events_calendar/event_details.html', {'event': event, 'tags': tags})
-    elif len(tags) > 0:
+    elif len(places) > 0:
         return render(request, 'events_calendar/event_details.html', {'event': event, 'places': places})
     else:
         return render(request, 'events_calendar/event_details.html', {'event': event})

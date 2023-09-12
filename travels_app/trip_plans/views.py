@@ -29,7 +29,7 @@ def trip_details(request, pk):
         return render(request, 'trip_plans/trip_details.html', {'trip': trip, 'tags': tags, 'places': places})
     elif len(tags) > 0:
         return render(request, 'trip_plans/trip_details.html', {'trip': trip, 'tags': tags})
-    elif len(tags) > 0:
+    elif len(places) > 0:
         return render(request, 'trip_plans/trip_details.html', {'trip': trip, 'places': places})
     else:
         return render(request, 'trip_plans/trip_details.html', {'trip': trip})

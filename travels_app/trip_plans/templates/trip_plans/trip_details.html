@@ -14,8 +14,9 @@
         <br>
         <div class="mb-2">
             {% if tags %}
-            {% for tag in tags %}
-            <a href="{% url 'places_tag' tag_id=tag.pk %}" class="btn btn-primary">{{ tag.tag }}</a> {% endfor %}
+                {% for tag in tags %}
+                    <a href="{% url 'places_tag' tag_id=tag.pk %}" class="btn btn-primary">{{ tag.tag }}</a> 
+                {% endfor %}
             {% endif %}
         </div>
         <div id="description">{{ place.description|safe }}</div>

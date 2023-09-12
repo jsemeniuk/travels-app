@@ -12,12 +12,13 @@
         </div>
         <div id="dates">{{ event.start_date }} - {{ event.end_date}}</div>
         <br>
-        <!--<div class="mb-2">
-            {% if tags %}
-            {% for tag in tags %}
-            <a href="{% url 'places_tag' tag_id=tag.pk %}" class="btn btn-primary">{{ tag.tag }}</a> {% endfor %}
+        <div class="mb-2">
+         {% if tags %}
+                {% for tag in tags %}
+                    <a href="{% url 'places_tag' tag_id=tag.pk %}" class="btn btn-primary">{{ tag.tag }}</a> 
+                {% endfor %}
             {% endif %}
-        </div>-->
+        </div>
         <div id="description">{{ event.description|safe }}</div>
         {% if places %}
         <div>
