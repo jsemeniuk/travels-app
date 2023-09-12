@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     "ckeditor",
     'my_travels',
     'lists',
-    "trip_plans"
+    "trip_plans",
+    "events_calendar"
 ]
 
 MIDDLEWARE = [

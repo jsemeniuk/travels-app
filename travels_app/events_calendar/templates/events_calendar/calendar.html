@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="col gy-4 mb-5"></div>
+    <div class="details">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col">
+                    <p><a href="{% url 'events_calendar' month=prev_month year=prev_year %}" class="button d-flex align-items-center"><span class="bi bi-caret-left-fill"></span></a></p>
+                </div>
+                <div class="col text-center">
+                    <h2>{{ month }}</h2>
+                </div>
+                <div class="col">
+                    <a href="{% url 'events_calendar' month=next_month year=next_year %}" class="button d-flex align-items-center"><span class="bi bi-caret-right-fill"></span></a>
+                </div>
+            </div>
+            <div class="row">
+              {% for day in days %}
+                <div class="col"><h3>{{ day }}</h3></div>
+              {% endfor %}  
+            </div>
+            {% for line in calendar %}
+            <div class="row calendar-row">
+                {% for day in line %}
+                    <div class="col border">
+                        <p id="id-calendar-day">{{ day.day }}</p>
+                        {% if day.events %}
+                        <div class="d-grid gap-1">
+                            {% for event in day.events|slice:":2" %}
+                                <button type="button" class="btn btn-primary btn-sm event-button"><a href="{% url 'event_details' pk=event.pk %}">{{ event.name }}</a></button>
+                            {% endfor %}
+                            {% if day.events_long %}
+                                <button type="button" class="btn btn-primary btn-sm event-button" data-bs-toggle="modal" data-bs-target="#events-modal">View all</button>
+                            {% endif %}
+                        </div>
+                        <div class="modal fade" id="events-modal" tabindex="-1" aria-labelledby="events-modal-label" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="events-modal-label">{{ day.day }}{{ month }}</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="d-grid gap-1">
+                                        {% for event in day.events %}
+                                            <button type="button" class="btn btn-primary btn-sm event-button"><a href="{% url 'event_details' pk=event.pk %}">{{ event.name }}</a></button>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

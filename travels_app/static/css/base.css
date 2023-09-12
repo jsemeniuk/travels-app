@@ -75,3 +75,15 @@ p a {
 .date-field {
     width: 130px;
 }
+
+.calendar-row {
+    height: 135px;
+}
+
+.event-button {
+    width: 100%;
+}
+
+#id-calendar-day {
+    margin: 0;
+}
