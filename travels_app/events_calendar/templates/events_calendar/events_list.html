@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="col gy-4 mb-5"></div>
+    <div class="details">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col">
+                    <p><a href="{% url 'events_list' month=prev_month year=prev_year %}" class="button d-flex align-items-center"><span class="bi bi-caret-left-fill"></span></a></p>
+                </div>
+                <div class="col text-center">
+                    <h2>{{ month }}</h2>
+                </div>
+                <div class="col">
+                    <a href="{% url 'events_list' month=next_month year=next_year %}" class="button d-flex align-items-center"><span class="bi bi-caret-right-fill"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="accordion" id="accordionExample">
+        {% for event in events%}
+        
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{ event.id }}" aria-expanded="true" aria-controls="collapse_{{ event.id }}">
+                    {{ event.start_date }} - {{ event.end_date}} {{ event.name}}
+                </button>
+              </h2>
+              <div id="collapse_{{ event.id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  {{ event.details|safe }}
+                  <a href="{% url 'event_details' pk=event.pk %}">See more</a>
+                </div>
+              </div>
+            </div>
+        {%endfor%}
+        </div>
+    </div>
+</div>
+{% endblock %}

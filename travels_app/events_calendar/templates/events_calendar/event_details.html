@@ -12,6 +12,9 @@
         </div>
         <div id="dates">{{ event.start_date }} - {{ event.end_date}}</div>
         <br>
+        <div id="description">
+            {{ event.details|safe }}
+        </div>
         <div class="mb-2">
          {% if tags %}
                 {% for tag in tags %}
