@@ -7,7 +7,7 @@ User= settings.AUTH_USER_MODEL
 
 class TripPlan(models.Model):
     name = models.CharField(max_length=100)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     start_date = models.DateField(blank=True)
     end_date = models.DateField(blank=True)
     details = RichTextField(blank=True)

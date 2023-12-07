@@ -18,7 +18,7 @@ class Places(models.Model):
     visit_date = models.DateField(blank=True)
     description = RichTextField(blank=True)
     photo = models.FileField(upload_to='travel_photos', blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     VISTITED = 'AV'
     WISHLIST = 'WI'
     GROUP_CHOICES = [

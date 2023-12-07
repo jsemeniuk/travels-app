@@ -32,7 +32,6 @@
               <div id="collapse_{{ event.id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                   {{ event.details|safe }}
-                  <a href="{% url 'event_details' pk=event.pk %}">See more</a>
                 </div>
               </div>
             </div>

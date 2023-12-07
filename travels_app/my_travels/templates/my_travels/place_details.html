@@ -7,8 +7,10 @@
     <div class="details">
         <div class="header">
             <h2>{{ place.name }}</h2>
+            {% if user.is_authenticated %}
             <a href="{% url 'place_edit' pk=place.pk %}" class="button d-flex align-items-center"><span class="bi bi-pencil"></span></a>
             <a href="{% url 'delete_place' pk=place.pk  %}" class="button delete-button d-flex align-items-center"><span class="bi bi-trash"></span></a>
+            {% endif %}
         </div>
         <div class="mb-2">
             {% if tags %}

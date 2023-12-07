@@ -6,7 +6,7 @@ User= settings.AUTH_USER_MODEL
 
 class Lists(models.Model):
     name = models.CharField(max_length=100)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     place_id = models.ForeignKey(Places, on_delete=models.CASCADE, blank=True, null=True)
  
 class Items(models.Model):

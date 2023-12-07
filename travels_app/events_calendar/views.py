@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Event
 from .forms import AddNewEventForm, EditEventForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import AnonymousUser
 from my_travels.models import Places, Tag
 from datetime import datetime, timedelta, date
 import calendar
@@ -45,7 +46,6 @@ class EventsCalendar:
                         events.append(event)
         return events
 
-@login_required
 def events_list(request, **kwargs):
     if 'month' in kwargs and 'year' in kwargs:
         calendar_month = int(kwargs['month'])
@@ -67,7 +67,10 @@ def events_list(request, **kwargs):
     else:
         prev_month = calendar_month - 1
         prev_year = calendar_year
-    events_all = Event.objects.filter(user=request.user, start_date__month=calendar_month)
+    if request.user != AnonymousUser():
+        events_all = Event.objects.filter(user=request.user, start_date__month=calendar_month)
+    else:
+        events_all = Event.objects.filter(user=None, start_date__month=calendar_month)
     return render(request, 'events_calendar/events_list.html', {'month': f'{calendar_month}.{calendar_year}','next_month': next_month, 'next_year': next_year, 'prev_month': prev_month, 'prev_year': prev_year, "events": events_all})
 
 @login_required

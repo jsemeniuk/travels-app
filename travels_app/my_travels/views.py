@@ -10,6 +10,7 @@ from .forms import EditPlaceForm, NewPlaceForm, TagForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 
@@ -29,9 +30,11 @@ def handler500(request, *args, **argv):
     return error_page(request, 500)
 
 
-@login_required(login_url='login')
 def place_detail(request, pk):
-    places_all = Places.objects.filter(user=request.user)
+    if request.user != AnonymousUser():
+        places_all = Places.objects.filter(user=request.user)
+    else:
+        places_all = Places.objects.filter(user=None)
     place = get_object_or_404(Places, pk=pk)
     tags = place.tag.all()
     suggestions = [choice(places_all) for i in range(3)]
@@ -137,16 +140,24 @@ class SearchResultsList(ListView):
 
     def get_queryset(self):
         places_all = []
+
+        if self.request.user != AnonymousUser():
+            request_user = self.request.user
+        else:
+            request_user = None
+
         if "tag_id" in self.kwargs:
-            places = Places.objects.filter(user=self.request.user).filter(Q(tag__id=self.kwargs["tag_id"]))
+            places = Places.objects.filter(user=request_user).filter(Q(tag__id=self.kwargs["tag_id"]))
         else:
             query = self.request.GET.get("q")
         
             if query != None:
-                search_tags = [tag.pk for tag in Tag.objects.filter(user=self.request.user).filter(Q(tag__icontains=query))]
-                places = Places.objects.filter(user=self.request.user).filter(Q(name__icontains=query) | Q(tag__in=search_tags)).distinct()
+                search_tags = [tag.pk for tag in Tag.objects.filter(user=request_user).filter(Q(tag__icontains=query))]
+
+                places = Places.objects.filter(user=request_user).filter(Q(name__icontains=query) | Q(tag__in=search_tags)).distinct()
             else:
-                places = Places.objects.filter(user=self.request.user)
+                places = Places.objects.filter(user=request_user)
+
         for place in places:
             if place.group == 'AV':
                 status = 'Visited'
