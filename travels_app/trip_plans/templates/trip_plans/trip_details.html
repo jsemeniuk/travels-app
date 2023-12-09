@@ -3,6 +3,7 @@
 
 
 {% block content %}
+{% load i18n %}
 <div class="col-9 gy-4 mb-5">
     <div class="details">
         <div class="header">
@@ -22,7 +23,7 @@
         <div id="description">{{ place.description|safe }}</div>
         {% if places %}
         <div>
-            <h4>Places to visit:</h4>
+            <h4>{% trans 'Places to visit:' %}</h4>
         </div>
         <div class="container-fluid px-0 text-center">
             <div class="row g-2 row-cols-auto">
@@ -32,7 +33,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ place.name }}</h5>
                             <p class="card-text"></p>
-                            <a href="{% url 'place_detail' pk=place.pk %}" class="btn btn-primary">View</a>
+                            <a href="{% url 'place_detail' pk=place.pk %}" class="btn btn-primary">{% trans 'View' %}</a>
                         </div>
                     </div>
                 </div>

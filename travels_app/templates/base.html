@@ -1,9 +1,10 @@
 {% load static %}
 <!doctype html>
-<html lang="en">
+<html lang="pl">
 
 <head>
-    <title>My Travel Journal</title>
+    {% load i18n %}
+    <title>{% trans 'My Travel Journal' %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -23,7 +24,7 @@
     <div class="container-fluid page-header">
         <div class="row">
             <div class="col text-start">
-                <a href="{% url 'main_page' %}"><img src="/static/images/whitelogo_ang_small.png"
+                <a href="{% url 'main_page' %}"><img src="{% trans 'logo' %}"
                         alt="Travel Journal"></a>
             </div>
             <div class="col text-end">
@@ -32,15 +33,15 @@
                         <span class="bi bi-list dropdown-icon">
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'main_page' %}">Map</a></li>
-                        <li><a class="dropdown-item" href="{% url 'places_all' %}">Places</a></li>
-                        <li><a class="dropdown-item" href="{% url 'events_list' %}">Events</a></li>
+                        <li><a class="dropdown-item" href="{% url 'main_page' %}">{% trans 'Map' %}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'places_all' %}">{% trans 'Places' %}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'events_list' %}">{% trans 'Events' %}</a></li>
                         {% if user.is_authenticated %}
-                        <li><a class="dropdown-item" href="{% url 'trips_all' %}">Trip Plans</a></li>
-                        <li><a class="dropdown-item" href="{% url 'lists_all' %}">Lists</a></li>
-                        <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
+                        <li><a class="dropdown-item" href="{% url 'trips_all' %}">{% trans 'Trip Plans' %}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'lists_all' %}">{% trans 'Lists' %}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">{% trans 'Log out' %}</a></li>
                         {% else %}
-                        <li><a class="dropdown-item" href="{% url 'login' %}">Log in</a></li>
+                        <li><a class="dropdown-item" href="{% url 'login' %}">{% trans 'Log in' %}</a></li>
                         {% endif %}
                     </ul>
                 </div>

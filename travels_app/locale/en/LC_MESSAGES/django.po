@@ -1,0 +1,215 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-08 19:53+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\templates\base.html:38
+msgid "logo"
+msgstr "/static/images/whitelogo_ang_small.png"
+
+#: .\events_calendar\templates\events_calendar\calendar.html:37
+msgid "View all"
+msgstr "View all"
+
+#: .\events_calendar\templates\events_calendar\event_details.html:29
+msgid "Location:"
+msgstr "Location:"
+
+#: .\events_calendar\templates\events_calendar\event_details.html:39
+#: .\lists\templates\lists\lists_all.html:22
+#: .\my_travels\templates\my_travels\place_details.html:34
+#: .\my_travels\templates\my_travels\places_all.html:33
+#: .\trip_plans\templates\trip_plans\trip_details.html:36
+#: .\trip_plans\templates\trip_plans\trips_all.html:34
+msgid "View"
+msgstr "View"
+
+#: .\events_calendar\templates\events_calendar\event_edit.html:13
+msgid "Event dates:"
+msgstr "Event dates:"
+
+#: .\events_calendar\templates\events_calendar\event_edit.html:20
+#: .\my_travels\templates\my_travels\place_edit.html:29
+#: .\trip_plans\templates\trip_plans\trip_plan_edit.html:26
+msgid "Select from existing tags:"
+msgstr "Select from existing tags:"
+
+#: .\events_calendar\templates\events_calendar\event_edit.html:22
+#: .\my_travels\templates\my_travels\place_edit.html:31
+#: .\trip_plans\templates\trip_plans\trip_plan_edit.html:28
+msgid "Or add new one"
+msgstr "Or add new one"
+
+#: .\events_calendar\templates\events_calendar\event_edit.html:25
+msgid "Add details:"
+msgstr "Add details:"
+
+#: .\events_calendar\templates\events_calendar\event_edit.html:29
+#: .\trip_plans\templates\trip_plans\trip_plan_edit.html:35
+msgid "Add places"
+msgstr "Add places"
+
+#: .\events_calendar\templates\events_calendar\event_edit.html:33
+#: .\events_calendar\templates\events_calendar\event_new.html:19
+#: .\lists\templates\lists\list_new.html:20
+#: .\my_travels\templates\my_travels\place_add.html:23
+#: .\my_travels\templates\my_travels\place_edit.html:38
+#: .\templates\confirm_delete.html:18
+#: .\trip_plans\templates\trip_plans\trip_plan_edit.html:40
+#: .\trip_plans\templates\trip_plans\trip_plan_new.html:19
+msgid "Cancel"
+msgstr "Cancel"
+
+#: .\events_calendar\templates\events_calendar\event_edit.html:34
+#: .\events_calendar\templates\events_calendar\event_new.html:20
+#: .\lists\templates\lists\list_new.html:21
+#: .\my_travels\templates\my_travels\place_add.html:24
+#: .\my_travels\templates\my_travels\place_edit.html:39
+#: .\trip_plans\templates\trip_plans\trip_plan_edit.html:41
+#: .\trip_plans\templates\trip_plans\trip_plan_new.html:20
+msgid "Save"
+msgstr "Save"
+
+#: .\events_calendar\templates\events_calendar\event_new.html:11
+msgid "Add new event"
+msgstr "Add new event"
+
+#: .\lists\templates\lists\list_new.html:11
+msgid "List name"
+msgstr "List name"
+
+#: .\lists\templates\lists\lists_all.html:9
+msgid "All lists"
+msgstr "All lists"
+
+#: .\lists\templates\lists\lists_all.html:13
+msgid "No lists found"
+msgstr "No lists found"
+
+#: .\my_travels\templates\my_travels\place_add.html:11
+msgid "Add new place"
+msgstr "Add new place"
+
+#: .\my_travels\templates\my_travels\place_add.html:18
+#: .\my_travels\templates\my_travels\place_edit.html:16
+msgid "Visited"
+msgstr "Visited"
+
+#: .\my_travels\templates\my_travels\place_edit.html:25
+msgid "Visits date:"
+msgstr "Visits date:"
+
+#: .\my_travels\templates\my_travels\place_edit.html:34
+msgid "Edit places details"
+msgstr "Edit places details"
+
+#: .\my_travels\templates\my_travels\places_all.html:9 
+#: .\templates\base.html:38
+msgid "Places"
+msgstr "Places"
+
+#: .\my_travels\templates\my_travels\places_all.html:13
+#: .\my_travels\templates\my_travels\places_all.html:14
+#: .\trip_plans\templates\trip_plans\trips_all.html:14
+#: .\trip_plans\templates\trip_plans\trips_all.html:15
+msgid "Search"
+msgstr "Search"
+
+#: .\my_travels\templates\my_travels\places_all.html:17
+#: .\trip_plans\templates\trip_plans\trips_all.html:18
+msgid "Clear"
+msgstr "Clear"
+
+#: .\my_travels\templates\my_travels\places_all.html:22
+msgid "No places found"
+msgstr "No places found"
+
+#: .\my_travels\templates\my_travels\tag.html:11
+msgid "Add tag"
+msgstr "Add tag"
+
+#: .\my_travels\templates\my_travels\tag.html:20
+msgid "Add"
+msgstr "Add"
+
+#: .\templates\base.html:7
+msgid "My Travel Journal"
+msgstr "My Travel Journal"
+
+#: .\templates\base.html:37
+msgid "Map"
+msgstr "Map"
+
+#: .\templates\base.html:39
+msgid "Events"
+msgstr "Events"
+
+#: .\templates\base.html:41
+msgid "Trip Plans"
+msgstr "Trip Plans"
+
+#: .\templates\base.html:42
+msgid "Lists"
+msgstr "Lists"
+
+#: .\templates\base.html:43
+msgid "Log out"
+msgstr "Log out"
+
+#: .\templates\base.html:45
+msgid "Log in"
+msgstr "Log in"
+
+#: .\templates\confirm_delete.html:11 .\templates\confirm_delete.html:19
+msgid "Delete"
+msgstr "Delete"
+
+#: .\templates\confirm_delete.html:16
+msgid "Are you sure that you want to delete"
+msgstr "Are you sure that you want to delete"
+
+#: .\templates\registration\login.html:12
+msgid "Welcome, Traveler!"
+msgstr "Welcome, Traveler!"
+
+#: .\trip_plans\templates\trip_plans\trip_details.html:26
+msgid "Places to visit:"
+msgstr "Places to visit:"
+
+#: .\trip_plans\templates\trip_plans\trip_plan_edit.html:16
+msgid "Done"
+msgstr "Done"
+
+#: .\trip_plans\templates\trip_plans\trip_plan_edit.html:19
+msgid "Trip dates:"
+msgstr "Trip dates:"
+
+#: .\trip_plans\templates\trip_plans\trip_plan_edit.html:31
+msgid "Trip details:"
+msgstr "Trip details:"
+
+#: .\trip_plans\templates\trip_plans\trip_plan_new.html:11
+msgid "Lets Plan Something New!"
+msgstr "Lets Plan Something New!"
+
+#: .\trip_plans\templates\trip_plans\trips_all.html:9
+msgid "All trips"
+msgstr "All trips"
+
+#: .\trip_plans\templates\trip_plans\trips_all.html:23
+msgid "No trips found"
+msgstr "No trips found"

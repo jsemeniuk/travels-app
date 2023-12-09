@@ -2,12 +2,13 @@
 {% load static %}
 
 {% block content %}
+{% load i18n %}
 <div class="container-fluid py-5 ">
     <div class="row justify-content-center">
         <div class="card" style="width: 18rem;">
             <div class="card-body text-center">
                 <div class="card-title">
-                    <h2>List name</h2>
+                    <h2>{% trans 'List name' %}</h2>
                 </div>
                 <div class="card-text">
                     <form method="POST" class="post-form">
@@ -16,8 +17,8 @@
                             {{ form.name }}
                         </div>
                     <br>
-                    <a href="{% url 'lists_all' %}" class="btn btn-secondary">Cancel</a>
-                    <button type="submit" class="save btn btn-primary">Add</button>
+                    <a href="{% url 'lists_all' %}" class="btn btn-secondary">{% trans 'Cancel' %}</a>
+                    <button type="submit" class="save btn btn-primary">{% trans 'Save' %}</button>
                     </form>  
                 </div>
             </div>

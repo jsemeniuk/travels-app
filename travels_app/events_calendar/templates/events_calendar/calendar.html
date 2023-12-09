@@ -3,6 +3,7 @@
 
 
 {% block content %}
+{% load i18n %}
 <div class="col gy-4 mb-5"></div>
     <div class="details">
         <div class="container">
@@ -33,7 +34,7 @@
                                 <button type="button" class="btn btn-primary btn-sm event-button"><a href="{% url 'event_details' pk=event.pk %}">{{ event.name }}</a></button>
                             {% endfor %}
                             {% if day.events_long %}
-                                <button type="button" class="btn btn-primary btn-sm event-button" data-bs-toggle="modal" data-bs-target="#events-modal">View all</button>
+                                <button type="button" class="btn btn-primary btn-sm event-button" data-bs-toggle="modal" data-bs-target="#events-modal">{% trans 'View all' %}</button>
                             {% endif %}
                         </div>
                         <div class="modal fade" id="events-modal" tabindex="-1" aria-labelledby="events-modal-label" aria-hidden="true">
